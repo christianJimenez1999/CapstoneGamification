@@ -13,18 +13,18 @@ const connection = mysql.createConnection({
 connection.connect(); 
 // ---------------------------------------------
 
-const test_db = async() => { // here for testing purposes.
-    let stmt = "SELECT * FROM candidates;";
+// const test_db = async() => { // here for testing purposes.
+//     let stmt = "SELECT * FROM candidates;";
     
-    return new Promise(function(resolve, reject) {
-      connection.query(stmt, function(error, result){
-          if(error) throw error;
-          resolve("result");
-        });
+//     return new Promise(function(resolve, reject) {
+//       connection.query(stmt, function(error, result){
+//           if(error) throw error;
+//           resolve("result");
+//         });
         
-    });
+//     });
     
-};
+// };
 
 app.get('/', async function(req,res){
     res.render('home');
@@ -33,7 +33,7 @@ app.get('/', async function(req,res){
 
 app.listen(process.env.PORT, process.env.IP, function(){
     
-    test_db().then(console.log); // here for testing purposes
+    // test_db().then(console.log); // here for testing purposes
     
     console.log("server running!");
 });
