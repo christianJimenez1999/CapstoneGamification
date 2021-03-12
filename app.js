@@ -30,6 +30,21 @@ app.get('/', async function(req,res){
     res.render('home');
 });
 
+app.get('/recruiter_login', function(req,res){
+    res.render('recruiter_login');
+});
+
+app.get('/candidate_login', function(req,res){
+    res.render('candidate_login');
+});
+
+app.post('/', function(req,res){
+    res.redirect('/recruiter_login');
+});
+
+app.post('/cand_login', function(req,res){
+    res.redirect('/candidate_login');
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
     
