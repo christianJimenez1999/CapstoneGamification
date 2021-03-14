@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    
+    <body>
+    <h5 style="background-color:#F1DEDA">
+        <head>
+            <title>ENTRY GAMES</title>
+            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+	        <link rel='stylesheet' type='text/css' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+	        <link rel='stylesheet' type='text/css' href='app.css'>
+        </head>
+        
+        <div>
+            <div class="header">
+                <h1 style='font-size: 60px'><p style="text-align:center">ENTRY GAMES</p></b></h1>
+                <h1 style='font-size: 30px'><p style="text-align:center"> Entry level C++ assessing for candidates </p></b></h1>
+            </div>
+        </div>
+    </h5>
+    
+        <main>
+            
+             <div class='container'>
+                 <div class='jumbotron'>
+                     <div align='center'>
+                         
+                         <form action='/create_recruiter' method='POST'>
+                             
+                             <div class='form-group row'>
+                                 <label for='name' class='col-sm-4 col-form-label'></label>
+                                 <div class='col-sm-4'>
+                                     <input type='text' class='form-control' id='name' name='name' placeholder='Name' required>
+                                 </div>
+                             </div>
+                             
+                             <div class='form-group row'>
+                                 <label for='username' class='col-sm-4 col-form-label'></label>
+                                 <divc class='col-sm-4'>
+                                     <input type='text' class='form-control' id='username' name='username' placeholder='Username' required>
+                                 </divc>
+                             </div>
+                             
+                             <div class='form-group row'>
+                                 <label for='email' class='col-sm-4 col-form-label'></label>
+                                 <div class='col-sm-4'>
+                                     <input type='text' class='form-control' id='email' name='email' placeholder='Email' required>
+                                 </div>
+                             </div>
+                             
+                             <div class='form-group row'>
+                                 <label for='password' class='col-sm-4 col-form-label'></label>
+                                 <divc class='col-sm-4'>
+                                     <input type='text' class='form-control' id='password' name='password' placeholder='Password' required>
+                                 </divc>
+                             </div>
+                             
+                             <div class='col-sm-4'>
+                                 <button class='btn btn-primary btn-sm btn-block'>Create Recruiter Account</button>
+                             </div>
+                         </form>
+                         <br/>
+                         <form action='/' method='POST'>
+                             <label>Already have an account?</label>
+                             <button class="btn btn-link">Sign In</button>
+                         </form>
+                         
+                     </div>
+                     
+                     </br>
+                 </div>
+             </div>
+            
+        </main>
+        
+        <footer>
+            <div class = 'footer'>
+                <hr>
+                <center>
+                <h6> By Goup 14</h6>
+                </center>
+            </div>
+        </footer>
+        
+    </body>
+    
+</html>

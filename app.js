@@ -30,6 +30,53 @@ app.get('/', async function(req,res){
     res.render('home');
 });
 
+//renders recruiter login
+app.get('/recruiter_login', function(req,res){
+    res.render('recruiter_login');
+});
+//renders creating an recruiter account
+app.get('/create_recruiter', function(req,res){
+    res.render('create_recruiter');
+});
+
+app.get('/candidate_login', function(req,res){
+    res.render('candidate_login');
+});
+
+app.get('/recruiter_loggedin', function(req,res){
+   res.render('recruiter_loggedin'); 
+});
+
+//sends you to recruiter login from starting page
+app.post('/', function(req,res){
+    res.redirect('/recruiter_login');
+});
+
+app.post('/cand_login', function(req,res){
+    res.redirect('/candidate_login');
+});
+//sends you to recruiter create from login if no existent account
+app.post('/assign_recruiter', function(req,res){
+   res.redirect('/create_recruiter'); 
+});
+
+//creating recruiter and adding to the database
+app.post('/create_recruiter', function(req,res){
+    console.log("hello");
+    let stmt = 'INSERT INTO recruiters (name,username,password,email) VALUES (?,?,?,?)';
+    console.log(req.body.name);
+    console.log(req.body.username);
+    console.log(req.body.password);
+    console.log(req.body.email);
+    let data = [req.body.name,req.body.username,req.body.password,req.body.email];
+    console.log(data);
+    connection.query(stmt, data, function(error, result){
+        if(error) throw error;
+        console.log(stmt);
+        res.redirect('/recruiter_login');
+    });
+
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
     
