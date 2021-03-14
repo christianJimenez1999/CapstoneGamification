@@ -1,7 +1,11 @@
 const express = require("express");
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
 const app = express();
+
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 const connection = mysql.createConnection({
     host: process.env.HOST,
@@ -76,6 +80,21 @@ app.post('/create_recruiter', function(req,res){
         res.redirect('/recruiter_login');
     });
 
+});
+
+app.post('/recruiter_login', function(req, res) {
+    
+    var query = 'SELECT * FROM recruiters WHERE username=? AND password=?';
+    
+    let data = [req.body.email, req.body.password];
+    
+    // start the session here if you can. also the issue was that we forgot about line 7
+    
+    connection.query(query, data, function(error, result){
+      if(error) throw error;
+      res.redirect('/recruiter_loggedin');
+    });
+    
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
