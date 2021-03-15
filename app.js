@@ -5,6 +5,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('publicCSS'));
 
 
 const connection = mysql.createConnection({
@@ -17,18 +18,6 @@ const connection = mysql.createConnection({
 connection.connect(); 
 // ---------------------------------------------
 
-// const test_db = async() => { // here for testing purposes.
-//     let stmt = "SELECT * FROM candidates;";
-    
-//     return new Promise(function(resolve, reject) {
-//       connection.query(stmt, function(error, result){
-//           if(error) throw error;
-//           resolve("result");
-//         });
-        
-//     });
-    
-// };
 
 app.get('/', async function(req,res){
     res.render('home');
@@ -47,8 +36,9 @@ app.get('/candidate_login', function(req,res){
     res.render('candidate_login');
 });
 
+// sends to the recruiter loggedin screen, needs the recruiter to have session
 app.get('/recruiter_loggedin', function(req,res){
-   res.render('recruiter_loggedin'); 
+   res.render('recruiter_loggedin');
 });
 
 //sends you to recruiter login from starting page
@@ -95,6 +85,27 @@ app.post('/recruiter_login', function(req, res) {
       res.redirect('/recruiter_loggedin');
     });
     
+});
+
+
+// the following are endpoints! 
+app.get('/create_candidate', function(req, res) {
+    
+    var random = Math.floor(Math.random() * 9999) + 1000;
+    
+    let stmt = 'INSERT INTO candidates (candidate_id, completion) VALUES (?,?);';
+    var data = [random, false];
+    
+    connection.query(stmt, data, function(error, result) {
+        if (error) {
+            res.json({result: false, cand_id: null});
+        }
+        else {
+            res.json({result: true, cand_id: random});
+        }
+        
+    });
+
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
