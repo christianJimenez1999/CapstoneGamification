@@ -56,17 +56,17 @@ app.post('/assign_recruiter', function(req,res){
 
 //creating recruiter and adding to the database
 app.post('/create_recruiter', function(req,res){
-    console.log("hello");
+    // console.log("hello");
     let stmt = 'INSERT INTO recruiters (name,username,password,email) VALUES (?,?,?,?)';
-    console.log(req.body.name);
-    console.log(req.body.username);
-    console.log(req.body.password);
-    console.log(req.body.email);
+    // console.log(req.body.name);
+    // console.log(req.body.username);
+    // console.log(req.body.password);
+    // console.log(req.body.email);
     let data = [req.body.name,req.body.username,req.body.password,req.body.email];
-    console.log(data);
+    // console.log(data);
     connection.query(stmt, data, function(error, result){
         if(error) throw error;
-        console.log(stmt);
+        // console.log(stmt);
         res.redirect('/recruiter_login');
     });
 
@@ -108,6 +108,24 @@ app.get('/create_candidate', function(req, res) {
 
 });
 
+// if the recruiter wants to search the candidate
+app.get('/get_candidate/:id', function(req, res) {
+    
+    var stmt = "SELECT * FROM candidates LEFT JOIN simon_says ON simon_says.user=candidates.candidate_id LEFT JOIN where_my_error ON where_my_error.user=candidates.candidate_id "+
+    "LEFT JOIN fast_or_faster ON fast_or_faster.user=candidates.candidate_id LEFT JOIN categories ON categories.user=candidates.candidate_id LEFT JOIN game_pad ON game_pad.user=candidates.candidate_id "+
+    "WHERE candidates.candidate_id=? ;";
+    var data = [req.params.id];
+
+    
+    
+    connection.query(stmt, data, function(error, result) {
+        if (error) res.json({result: false, data: error});
+        else res.json({result: true, data: result});
+    });
+});
+
+
+// the port listen
 app.listen(process.env.PORT, process.env.IP, function(){
     
     // test_db().then(console.log); // here for testing purposes
