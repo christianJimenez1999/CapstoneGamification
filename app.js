@@ -111,8 +111,8 @@ app.get('/create_candidate', function(req, res) {
 // if the recruiter wants to search the candidate
 app.get('/get_candidate/:id', function(req, res) {
     
-    var stmt = "SELECT * FROM candidates LEFT JOIN simon_says ON simon_says.user=candidates.candidate_id LEFT JOIN where_my_error ON where_my_error.user=candidates.candidate_id "+
-    "LEFT JOIN fast_or_faster ON fast_or_faster.user=candidates.candidate_id LEFT JOIN categories ON categories.user=candidates.candidate_id LEFT JOIN game_pad ON game_pad.user=candidates.candidate_id "+
+    var stmt = "SELECT * FROM candidates LEFT JOIN simon_says ON simon_says.simon_says_user=candidates.candidate_id LEFT JOIN where_my_error ON where_my_error.where_my_error_user=candidates.candidate_id "+
+    "LEFT JOIN fast_or_faster ON fast_or_faster.fast_or_faster_user=candidates.candidate_id LEFT JOIN categories ON categories.categories_user=candidates.candidate_id LEFT JOIN game_pad ON game_pad.game_pad_user=candidates.candidate_id "+
     "WHERE candidates.candidate_id=? ;";
     var data = [req.params.id];
 
@@ -120,7 +120,9 @@ app.get('/get_candidate/:id', function(req, res) {
     
     connection.query(stmt, data, function(error, result) {
         if (error) res.json({result: false, data: error});
-        else res.json({result: true, data: result});
+        else {
+            res.json({result: true, data: result[0]});
+        }
     });
 });
 
