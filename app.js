@@ -1,10 +1,16 @@
 const express = require("express");
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+var sessions = require('express-session');
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(sessions({
+    secret: 'gamification project', // this one is useless
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(express.static('publicCSS'));
 
 
@@ -18,6 +24,14 @@ const connection = mysql.createConnection({
 connection.connect(); 
 // ---------------------------------------------
 
+
+// helper functions 
+
+// check if user is authenticated
+function check_authenticated(req, res, next) {
+    if(!req.session.authenticated) res.redirect('/');
+    else next();
+}
 
 app.get('/', async function(req,res){
     res.render('home');
@@ -37,8 +51,8 @@ app.get('/candidate_login', function(req,res){
 });
 
 // sends to the recruiter loggedin screen, needs the recruiter to have session
-app.get('/recruiter_loggedin', function(req,res){
-   res.render('recruiter_loggedin');
+app.get('/recruiter_loggedin', check_authenticated , function(req,res){
+   res.render('recruiter_loggedin', {recruiter: req.session.userInfo});
 });
 
 //sends you to recruiter login from starting page
@@ -72,19 +86,39 @@ app.post('/create_recruiter', function(req,res){
 
 });
 
-app.post('/recruiter_login', function(req, res) {
+function logInRecruiter(username, password) {
     
     var query = 'SELECT * FROM recruiters WHERE username=? AND password=?';
     
-    let data = [req.body.email, req.body.password];
+    let data = [username, password];
     
     // start the session here if you can. also the issue was that we forgot about line 7
-    
-    connection.query(query, data, function(error, result){
-      if(error) throw error;
-      res.redirect('/recruiter_loggedin');
+    return new Promise(function(resolve,reject){
+        connection.query(query, data, function(error, result){
+          if(error) throw error;
+          else{
+            //   console.log("success", result);
+              resolve(result[0]);
+              
+          }
+        });
     });
+
+}
+
+
+app.post('/recruiter_login', async function(req, res) {
     
+    let attempt = await logInRecruiter(req.body.username, req.body.password);
+    
+    if(attempt) {
+        req.session.authenticated = true;
+        req.session.userInfo = attempt;
+        res.redirect('/recruiter_loggedin');
+    }
+    else {
+        res.redirect('/recruiter_login');
+    }
 });
 
 
@@ -108,6 +142,12 @@ app.get('/create_candidate', function(req, res) {
 
 });
 
+app.get('/log_out', check_authenticated ,function(req, res) {
+    req.session.destroy();
+    // console.log("logged out");
+    res.redirect('/');
+});
+
 // if the recruiter wants to search the candidate
 app.get('/get_candidate/:id', function(req, res) {
     
@@ -115,8 +155,6 @@ app.get('/get_candidate/:id', function(req, res) {
     "LEFT JOIN fast_or_faster ON fast_or_faster.fast_or_faster_user=candidates.candidate_id LEFT JOIN categories ON categories.categories_user=candidates.candidate_id LEFT JOIN game_pad ON game_pad.game_pad_user=candidates.candidate_id "+
     "WHERE candidates.candidate_id=? ;";
     var data = [req.params.id];
-
-    
     
     connection.query(stmt, data, function(error, result) {
         if (error) res.json({result: false, data: error});

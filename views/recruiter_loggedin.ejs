@@ -13,6 +13,8 @@
 
     <body>
         <h1>Recruiter logged in</h1>
+        <h3><%= recruiter.username%></h3>
+        <h3><%= recruiter.email%></h3>
         
         <button onclick='requestCandidateId()'>Click test</button>
         <div id="id_display"></div>
@@ -25,5 +27,7 @@
         <div id="search_results"></div>
         
         <script src="jswork/create.js"></script>
+        
+        <a href="/log_out"><button>Log out</button></a>
     </body>
 </html>
