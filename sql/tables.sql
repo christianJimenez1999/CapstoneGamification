@@ -24,50 +24,50 @@ completion       boolean
 
 
 create table simon_says (
-user             integer,
-points           integer,
-start_time       datetime,
-end_time         datetime,
-completed        boolean,
-foreign key (user) references candidates(candidate_id)
+simon_says_user             integer,
+simon_says_points           integer,
+simon_says_start_time       datetime,
+simon_says_end_time         datetime,
+simon_says_completed        boolean,
+foreign key (simon_says_user) references candidates(candidate_id)
 );
 
 
 create table where_my_error (
-user             integer,
-correct          integer,
-wrong            integer,
-start_time       datetime,
-end_time         datetime,
-completed        boolean,
-foreign key (user) references candidates(candidate_id)
+where_my_error_user             integer,
+where_my_error_correct          integer,
+where_my_error_wrong            integer,
+where_my_error_start_time       datetime,
+where_my_error_end_time         datetime,
+where_my_error_completed        boolean,
+foreign key (where_my_error_user) references candidates(candidate_id)
 );
 
 
 create table fast_or_faster (
-user             integer,
-points           integer,
-completed        boolean,
-foreign key (user) references candidates(candidate_id)
+fast_or_faster_user             integer,
+fast_or_faster_points           integer,
+fast_or_faster_completed        boolean,
+foreign key (fast_or_faster_user) references candidates(candidate_id)
 );
 
 
 create table categories (
-user             integer,
-correct          integer,
-wrong            integer,
-start_time       datetime,
-end_time         datetime,
-completed        boolean,
-foreign key (user) references candidates(candidate_id)
+categories_user             integer,
+categories_correct          integer,
+categories_wrong            integer,
+categories_start_time       datetime,
+categories_end_time         datetime,
+categories_completed        boolean,
+foreign key (categories_user) references candidates(candidate_id)
 );
 
 create table game_pad (
-user             integer,
-correct          integer,
-wrong            integer,
-start_time       datetime,
-end_time         datetime,
-completed        boolean,
-foreign key (user) references candidates(candidate_id)
+game_pad_user             integer,
+game_pad_correct          integer,
+game_pad_wrong            integer,
+game_pad_start_time       datetime,
+game_pad_end_time         datetime,
+game_pad_completed        boolean,
+foreign key (game_pad_user) references candidates(candidate_id)
 );

@@ -1,1 +1,42 @@
-<h1>MADE IT?</h1>
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <head>
+            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+	        <link rel='stylesheet' type='text/css' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+	        <link rel='stylesheet' type='text/css' href='app.css'>
+        </head>
+    </head>
+
+    <body>
+        
+        <div>
+            <h1>Recruiter logged in</h1>
+            <h3>Hello <%= recruiter.username%></h3>
+        </div>
+        
+        <div class='container row'>
+            <div class='col-sm'>
+                <button onclick='requestCandidateId()'>Request a game ID</button>
+                <div id="id_display"></div>
+            </div>
+            <div class='col-sm'>
+                <input type="number" id="search_id" name="quantity" min="1000" max="9999" placeholder="ex: 1235">
+                <button onclick='seeCandidate()'>Search candidate</button>
+                
+                <div id="cand_display"></div> <!--this one is to display errors-->
+                
+                <div style="max-height: 400px; overflow-y: scroll;" id="search_results"></div>
+                
+            </div>
+        </div>
+        
+        <a href="/log_out"><button>Log out</button></a>
+        
+        <script src="jswork/create.js"></script>
+
+    </body>
+</html>
