@@ -25,7 +25,7 @@ connection.connect();
 // ---------------------------------------------
 
 
-// helper functions 
+// general helper functions 
 
 // check if user is authenticated
 function check_authenticated(req, res, next) {

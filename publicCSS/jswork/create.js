@@ -10,7 +10,7 @@ function requestCandidateId() {
             success: function(results) {
                 console.log("results", results);
                 if(results['result']) {
-                    $("#id_display").html("Here is the generated ID for the candidate: " + results['cand_id']);
+                    $("#id_display").html("<h3>Here is the generated ID for the candidate: " + results['cand_id'] + "</h3>");
                 }
                 else{
                     $("#id_display").html("Please try again, something failed on the backend.")
@@ -37,7 +37,7 @@ function seeCandidate() {
                     console.log("results", results);
                     if(results['result']) {
                         try {
-                            $('#search_results').append("<div>Here is the candidate's current status " + results['data']['candidate_id'] + "<h1>");
+                            // $('#search_results').prepend("<div><h3>Here is candidate's " + results['data']['candidate_id'] + " current status <h3><h1>");
                             
                             let categories =  "<h5>Categories</h5><table> <tr> <th>Completed</th> <th>Correct</th> <th>Wrong</th> <th>start_time</th> <th>end_time</th> </tr>"+
                             "<td> " + results['data']['categories_completed'] + " </td><td> " + results['data']['categories_correct'] + " </td><td> " + 
@@ -71,8 +71,9 @@ function seeCandidate() {
                             
                             let result_div = "<div>" + categories + fast_or_faster + game_pad + simon_says + where_my_error + "<div>";
                             
-                            $('#search_results').append(result_div);
+                            $('#search_results').prepend(result_div);
                             
+                            $('#search_results').prepend("<div><h3>Here is candidate's " + results['data']['candidate_id'] + " current status <h3><h1>");
                             
                             $('#cand_display').html(""); // just to clear any possible previous error message
                         }

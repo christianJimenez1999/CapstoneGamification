@@ -12,22 +12,31 @@
     </head>
 
     <body>
-        <h1>Recruiter logged in</h1>
-        <h3><%= recruiter.username%></h3>
-        <h3><%= recruiter.email%></h3>
         
-        <button onclick='requestCandidateId()'>Click test</button>
-        <div id="id_display"></div>
+        <div>
+            <h1>Recruiter logged in</h1>
+            <h3>Hello <%= recruiter.username%></h3>
+        </div>
         
-        <input type="number" id="search_id" name="quantity" min="1000" max="9999" placeholder="ex: 1235">
-        <button onclick='seeCandidate()'>Click test 2</button>
-        
-        <div id="cand_display"></div>
-        
-        <div id="search_results"></div>
-        
-        <script src="jswork/create.js"></script>
+        <div class='container row'>
+            <div class='col-sm'>
+                <button onclick='requestCandidateId()'>Request a game ID</button>
+                <div id="id_display"></div>
+            </div>
+            <div class='col-sm'>
+                <input type="number" id="search_id" name="quantity" min="1000" max="9999" placeholder="ex: 1235">
+                <button onclick='seeCandidate()'>Search candidate</button>
+                
+                <div id="cand_display"></div> <!--this one is to display errors-->
+                
+                <div style="max-height: 400px; overflow-y: scroll;" id="search_results"></div>
+                
+            </div>
+        </div>
         
         <a href="/log_out"><button>Log out</button></a>
+        
+        <script src="jswork/create.js"></script>
+
     </body>
 </html>
