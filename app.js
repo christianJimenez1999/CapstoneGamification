@@ -1,12 +1,12 @@
 const express = require("express");
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
-var sessions = require('express-session');
+var session = require('express-session');
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(sessions({
+app.use(session({
     secret: 'gamification project', // this one is useless
     resave: true,
     saveUninitialized: true
