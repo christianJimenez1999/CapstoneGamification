@@ -29,7 +29,8 @@ connection.connect();
 
 // check if user is authenticated
 function check_authenticated(req, res, next) {
-    if(!req.session.authenticated) res.redirect('/');
+    console.log(req.session.authenticated);
+    if(req.session.authenticated =! true) res.redirect('/');
     else next();
 }
 
@@ -72,10 +73,10 @@ app.post('/assign_recruiter', function(req,res){
 app.post('/create_recruiter', function(req,res){
     // console.log("hello");
     let stmt = 'INSERT INTO recruiters (name,username,password,email) VALUES (?,?,?,?)';
-    // console.log(req.body.name);
-    // console.log(req.body.username);
-    // console.log(req.body.password);
-    // console.log(req.body.email);
+     console.log(req.body.name);
+     console.log(req.body.username);
+     console.log(req.body.password);
+     console.log(req.body.email);
     let data = [req.body.name,req.body.username,req.body.password,req.body.email];
     // console.log(data);
     connection.query(stmt, data, function(error, result){
@@ -110,13 +111,13 @@ function logInRecruiter(username, password) {
 app.post('/recruiter_login', async function(req, res) {
     
     let attempt = await logInRecruiter(req.body.username, req.body.password);
+    let name = req.body.username;
     
     if(attempt) {
-        console.log(attempt);
         req.session.authenticated = true;
-        console.log(req.session.authenticated);
         req.session.userInfo = attempt;
-        res.redirect('/recruiter_loggedin');
+        res.render('recruiter_loggedin', {recruiter: req.session.userInfo})
+        //res.redirect('/recruiter_loggedin');
     }
     else {
         res.redirect('/recruiter_login');
