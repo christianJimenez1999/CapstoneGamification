@@ -112,7 +112,9 @@ app.post('/recruiter_login', async function(req, res) {
     let attempt = await logInRecruiter(req.body.username, req.body.password);
     
     if(attempt) {
+        console.log(attempt);
         req.session.authenticated = true;
+        console.log(req.session.authenticated);
         req.session.userInfo = attempt;
         res.redirect('/recruiter_loggedin');
     }
