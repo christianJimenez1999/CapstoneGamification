@@ -30,7 +30,7 @@ connection.connect();
 // check if user is authenticated
 function check_authenticated(req, res, next) {
     console.log(req.session.authenticated);
-    if(req.session.authenticated =! true) res.redirect('/');
+    if(!req.session.authenticated) res.redirect('/');
     else next();
 }
 
