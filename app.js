@@ -56,6 +56,11 @@ app.get('/recruiter_loggedin', check_authenticated , function(req,res){
    res.render('recruiter_loggedin', {recruiter: req.session.userInfo});
 });
 
+// sends to the recruiter loggedin screen, needs the recruiter to have session
+app.get('/candidate_loggedin', check_authenticated , function(req,res){
+   res.render('candidate_loggedin', {candidate: req.session.candidateInfo});
+});
+
 //sends you to recruiter login from starting page
 app.post('/', function(req,res){
     res.redirect('/recruiter_login');
@@ -143,6 +148,43 @@ app.get('/create_candidate', function(req, res) {
         
     });
 
+});
+
+function logInCadidate(ID) {
+    
+    var query = 'SELECT * FROM candidates WHERE candidate_id=?';
+    
+    let data = [ID];
+    
+    // start the session here if you can. also the issue was that we forgot about line 7
+    return new Promise(function(resolve,reject){
+        connection.query(query, data, function(error, result){
+          if(error) throw error;
+          else{
+            //   console.log("success", result);
+              resolve(result[0]);
+              
+          }
+        });
+    });
+
+}
+
+
+app.post('/candidate_login', async function(req, res) {
+    
+    let attempt = await logInCadidate(req.body.ID);
+    let canID = req.body.ID;
+    
+    if(attempt) {
+        req.session.authenticated = true;
+        req.session.candidateInfo = attempt;
+        res.render('candidate_loggedin', {candidate: req.session.candidateInfo})
+        //res.redirect('/recruiter_loggedin');
+    }
+    else {
+        res.redirect('/candidate_login');
+    }
 });
 
 app.get('/log_out', check_authenticated ,function(req, res) {
