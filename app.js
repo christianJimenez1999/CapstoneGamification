@@ -78,10 +78,10 @@ app.post('/assign_recruiter', function(req,res){
 app.post('/create_recruiter', function(req,res){
     // console.log("hello");
     let stmt = 'INSERT INTO recruiters (name,username,password,email) VALUES (?,?,?,?)';
-     console.log(req.body.name);
-     console.log(req.body.username);
-     console.log(req.body.password);
-     console.log(req.body.email);
+    //  console.log(req.body.name);
+    //  console.log(req.body.username);
+    //  console.log(req.body.password);
+    //  console.log(req.body.email);
     let data = [req.body.name,req.body.username,req.body.password,req.body.email];
     // console.log(data);
     connection.query(stmt, data, function(error, result){
@@ -207,6 +207,11 @@ app.get('/get_candidate/:id', function(req, res) {
             res.json({result: true, data: result[0]});
         }
     });
+});
+
+
+app.get('/simon_says', function(req, res) {
+    res.render('simon_says');
 });
 
 
