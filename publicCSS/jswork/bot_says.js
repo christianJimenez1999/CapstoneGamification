@@ -99,8 +99,8 @@ function checkInputs() { // we know what to check based on the internalHumanCoun
 
 function maker() {
     $(document).ready(function() {
-        // console.log("NEXT QUESTION NUM", nextQuestionNum)
-        // console.log("DIFFICULTY", difficulty)
+        console.log("NEXT QUESTION NUM", nextQuestionNum)
+        console.log("DIFFICULTY", difficulty)
         var humanInputA = "<h3>"+questions[difficulty][nextQuestionNum]['human']['name']+
         "</h3><br><table><tr><th>name</th><th>type</th></tr>"
         var humanInputB = ""
@@ -119,7 +119,7 @@ function maker() {
     });
 }
 
-maker() // need one to just start the damn thing
+// maker() // need one to just start the damn thing
 
 function completedAll() { // have some modal or something
     console.log("\n\nCONGRATS u did the entire game!")
@@ -161,6 +161,17 @@ function controller() {
             // implement the timer here, put a gif on the actual html 
             
             // if the the tempQuestion equals the the internalBotCount then call the checker, else don't
+            setTimeout(
+              function() 
+              {
+                  if(tempQuestion == internalBotCount){
+                      checkInputs();
+                  }
+                  else{
+                      console.log("NO TIMEOUT!");
+                  }
+                //do something special
+              }, 15000);
             
         }
         
@@ -169,7 +180,7 @@ function controller() {
 
 var questions = {
     intro:{
-    1:{
+    3:{
         bot: "Make me a simple car diagram with a color and price attribute",
         human:{name:"simple car", input_count: 2, correct_inputs:{"color":["string"], "price": ["double"]}}
     },
