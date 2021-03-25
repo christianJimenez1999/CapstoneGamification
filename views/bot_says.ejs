@@ -10,19 +10,25 @@
     </head>
     
     <body>
-        <title>Simon Says</title>
+        <title>Bot Says</title>
         <div class="header">
-            <h1>Simon Says</h1>
+            <h1>Bot Says</h1>
         </div>
         
-        <button onClick='appendBot("potatoe")'>testerBot</button>
-        <button onClick='appendHuman("potatoe")'>testerHuman</button>
-        <div class="simon_says_game" id="simon_says_game">  <!--the class for this div is in the app.css-->
+        <button onClick='appendBot("potatoe")'>testerBot</button> <!--THIS WAS FOR TESTING-->
+        <button onClick='appendHuman("potatoe")'>testerHuman</button> <!--THIS WAS FOR TESTING-->
+
+        <div class="container" id="display_game_statistics">
+            <div id="points"><h3>0</h3></div>
+            <div id="lives"><h3>4</h3></div>
+        </div>
+        
+        <div class="bot_says_game" id="bot_says_game">  <!--the class for this div is in the app.css-->
             <!--<h10>potatoe</h10>-->
         </div>
         
         
-        <script src='jswork/simon_says.js'></script>
+        <script src='jswork/bot_says.js'></script>
     </body>
     
 </html>

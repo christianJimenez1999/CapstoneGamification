@@ -18,8 +18,9 @@ main{
     flex: 1;
 }
 
-.simon_says_game{
+.bot_says_game{
     background-color: lightyellow;
     margin-left: 100px;
     margin-right: 100px;
 }
+

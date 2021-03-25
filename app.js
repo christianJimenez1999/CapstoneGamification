@@ -210,8 +210,8 @@ app.get('/get_candidate/:id', function(req, res) {
 });
 
 
-app.get('/simon_says', function(req, res) {
-    res.render('simon_says');
+app.get('/bot_says', function(req, res) {
+    res.render('bot_says');
 });
 
 
