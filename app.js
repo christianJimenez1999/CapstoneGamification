@@ -68,6 +68,9 @@ app.get('/recruiter_loggedin', check_authenticated , function(req,res){
 app.get('/candidate_loggedin', check_authenticated , function(req,res){
    res.render('candidate_loggedin', {candidate: req.session.candidateInfo});
 });
+app.get('/into_gamepad', function(req,res){
+    res.render('game_pad');
+})
 
 //sends you to recruiter login from starting page
 app.post('/', function(req,res){
@@ -81,6 +84,11 @@ app.post('/cand_login', function(req,res){
 app.post('/assign_recruiter', function(req,res){
    res.redirect('/create_recruiter'); 
 });
+
+//makes path to render the game pad webpage
+app.post('/into_gamepad', function(req,res){
+    res.redirect('/into_gamepad');
+})
 
 //creating recruiter and adding to the database
 app.post('/create_recruiter', function(req,res){
@@ -183,6 +191,7 @@ app.post('/candidate_login', async function(req, res) {
     
     let attempt = await logInCadidate(req.body.ID);
     let canID = req.body.ID;
+    console.log(attempt);
     
     if(attempt) {
         req.session.authenticated = true;
@@ -193,6 +202,10 @@ app.post('/candidate_login', async function(req, res) {
     else {
         res.redirect('/candidate_login');
     }
+});
+
+app.post('/return_candidate', function(req,res){
+   res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
 });
 
 app.get('/log_out', check_authenticated ,function(req, res) {
