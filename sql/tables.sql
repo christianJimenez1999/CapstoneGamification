@@ -1,12 +1,15 @@
 drop table if exists recruiters;
 
-drop table if exists simon_says;
+drop table if exists bot_says;
 drop table if exists where_my_error;
 drop table if exists fast_or_faster;
 drop table if exists categories;
 drop table if exists game_pad;
+drop table if exists simon_says;
 
+-- SET FOREIGN_KEY_CHECKS=0;
 drop table if exists candidates;
+-- SET FOREIGN_KEY_CHECKS=1;
 
 create table recruiters (
 recruiter_id     integer primary key NOT NULL AUTO_INCREMENT,
@@ -23,13 +26,13 @@ completion       boolean
 );
 
 
-create table simon_says (
-simon_says_user             integer,
-simon_says_points           integer,
-simon_says_start_time       datetime,
-simon_says_end_time         datetime,
-simon_says_completed        boolean,
-foreign key (simon_says_user) references candidates(candidate_id)
+create table bot_says (
+bot_says_user             integer primary key,
+bot_says_points           integer,
+bot_says_start_time       datetime,
+bot_says_end_time         datetime,
+bot_says_completed        boolean,
+foreign key (bot_says_user) references candidates(candidate_id)
 );
 
 

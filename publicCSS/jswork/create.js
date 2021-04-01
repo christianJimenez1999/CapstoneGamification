@@ -57,11 +57,11 @@ function seeCandidate() {
                             " </td></tr></table>";
                             game_pad = game_pad.replaceAll("null", "n/a");
                             
-                            let simon_says =  "<h5>Simon Says</h5><table> <tr> <th>Completed</th> <th>Points</th> <th>start_time</th> <th>end_time</th> </tr>"+
-                            "<td> " + results['data']['simon_says_completed'] + " </td><td> " + results['data']['simon_says_points'] +
-                            " </td><td> " + results['data']['simon_says_start_time'] + " </td><td> " + results['data']['simon_says_end_time'] +
+                            let bot_says =  "<h5>bot Says</h5><table> <tr> <th>Completed</th> <th>Points</th> <th>start_time</th> <th>end_time</th> </tr>"+
+                            "<td> " + results['data']['bot_says_completed'] + " </td><td> " + results['data']['bot_says_points'] +
+                            " </td><td> " + results['data']['bot_says_start_time'] + " </td><td> " + results['data']['bot_says_end_time'] +
                             " </td></tr></table>";
-                            simon_says = simon_says.replaceAll("null", "n/a");
+                            bot_says = bot_says.replaceAll("null", "n/a");
                             
                             let where_my_error =  "<h5>Where's My Error</h5><table> <tr> <th>Completed</th> <th>Correct</th> <th>Wrong</th> <th>start_time</th> <th>end_time</th> </tr>"+
                             "<td> " + results['data']['where_my_error_completed'] + " </td><td> " + results['data']['where_my_error_correct'] + " </td><td> " + 
@@ -69,7 +69,7 @@ function seeCandidate() {
                             " </td></tr></table>";
                             where_my_error = where_my_error.replaceAll("null", "n/a");
                             
-                            let result_div = "<div>" + categories + fast_or_faster + game_pad + simon_says + where_my_error + "<div>";
+                            let result_div = "<div>" + categories + fast_or_faster + game_pad + bot_says + where_my_error + "<div>";
                             
                             $('#search_results').prepend(result_div);
                             
