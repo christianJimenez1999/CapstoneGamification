@@ -15,7 +15,7 @@
         
         <div>
             <h1>Candidate logged in</h1>
-            <label class='font-italic font-weight-light' >GamePad section</label>
+            <label class='font-italic font-weight-light' >Categories section</label>
         </div>
         
         <div class='container'>
@@ -23,7 +23,14 @@
                 <div align='center'>
                      
                     <strong>
-                        <p>Welcome to our fundemantal games answer to the best of your capabilities!</p>    
+                        <p>*Question Name*</p>    
+                    </strong>
+                    
+                    <br>
+                    
+                    <strong>
+                        <p>*Answer Choice* AnswerChoice*</p>
+                        <p>*Answer Choice* AnswerChoice*</p>
                     </strong>
                     
                     <input id='answer' name='answer' placeholder'insert answer here' required>
@@ -32,25 +39,12 @@
                     </br>
                     
                     <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='one'>1</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='two'>2</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='three'>3</button>
-                        
+                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='one'>Answer 1</button>
+                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='two'>Answer 2</button>
                     </div>
                     <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='four' >4</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='five' >5</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='six' >6</button>
-                    </div>
-                    <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='seven' >7</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='eight' >8</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='nine' >9</button>
-                    </div>
-                    <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='zero' >0</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=c() id='clear' >Clear</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=backSpace() id='back' >backspace</button>
+                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='four' >Answer 3</button>
+                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='five' >Answer 4</button>
                     </div>
                     
                     </br>
@@ -64,18 +58,6 @@
                             var text = document.getElementById("answer");
                             var numb = num.innerHTML;
                             text.value = text.value + numb;
-                        }
-                        
-                        function c(){
-                            var text = document.getElementById("answer");
-                            text.value = "";
-                        }
-                        
-                        function backSpace(){
-                            var text = document.getElementById("answer");
-                            let str = text.value;
-                            str = str.slice(0, -1);
-                            text.value = "" + str;
                         }
                         
                     </script>
