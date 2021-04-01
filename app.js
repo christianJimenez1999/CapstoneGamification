@@ -51,6 +51,14 @@ app.get('/candidate_login', function(req,res){
     res.render('candidate_login');
 });
 
+app.get('/into_categories', function(req,res){
+    res.render('categories');
+})
+
+app.post('/into_categories', function(req,res){
+    res.redirect('/into_categories');
+})
+
 // sends to the recruiter loggedin screen, needs the recruiter to have session
 app.get('/recruiter_loggedin', check_authenticated , function(req,res){
    res.render('recruiter_loggedin', {recruiter: req.session.userInfo});
