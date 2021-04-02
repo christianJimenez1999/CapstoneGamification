@@ -23,16 +23,7 @@
                 <div align='center'>
                      
                     <strong>
-                        <p>Welcome to our fundemantal games answer to the best of your capabilities!</p>
-                        <div id='score'></div>
-                        
-                        <script>
-                            function display(id){
-                                var text = document.getElementById(id);
-                                text.innerHTML = "score: " + localStorage["score"];
-                            }
-                            display('score');
-                        </script>
+                        <p>Welcome to our Fundemantal games answer to the best of your capabilities!</p>    
                     </strong>
                     
                     <input id='answer' name='answer' placeholder'insert answer here' required>
@@ -132,17 +123,9 @@
                     </script>
                     <form action='/return_candidate' method='POST'>
                         <div class='col-sm-2'>
-                        <button class='btn btn-primary btn-sm btn-block'>Return to Menu</button>
+                        <button class='btn btn-primary btn-sm btn-block' id='menu'>Return to Menu</button>
                         </div>
                     </form>
-                    
-                    <!--sends to the second webpage in the game pad-->
-                    <form action='/pad2' method='POST'>
-                        <div class='col-sm-1'>
-                            <button style="visibility:hidden;" id='menu'></button>
-                        </div>
-                    </form>
-                    
                 </div>
                 
             </div>

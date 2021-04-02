@@ -64,6 +64,10 @@ app.get('/into_gamepad', function(req,res){
     res.render('game_pad');
 })
 
+app.get('/game_pad2', function(req,res){
+    res.render('game_pad2');
+});
+
 //sends you to recruiter login from starting page
 app.post('/', function(req,res){
     res.redirect('/recruiter_login');
@@ -198,6 +202,10 @@ app.post('/candidate_login', async function(req, res) {
 
 app.post('/return_candidate', function(req,res){
    res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+});
+
+app.post('/pad2', function(req,res){
+   res.redirect('/game_pad2'); 
 });
 
 app.get('/log_out', check_authenticated ,function(req, res) {

@@ -19,7 +19,29 @@
         </div>
         
         <form action='/into_gamepad' method='POST'>
-            <button class="btn btn-link">Game Pad</button>
+            <div class='col-sm-12'>
+                <button class="btn btn-link">Game Pad</button>
+                <div style="display: inline-block;" id='score'></div>
+                <div style="display: inline-block;" id='Qneeded'></div>
+            </div>
+            <script>
+                localStorage["score"] = 0;
+                localStorage["Qneeded"] = 5;
+                
+                function display(id){
+                    var text = document.getElementById(id);
+                    text.innerHTML = "score: " + localStorage["score"] + " /";
+                }
+                
+                function displayNeeded(id){
+                    var txt = document.getElementById(id);
+                    txt.innerHTML = "Questions needed: " + localStorage["Qneeded"];
+                }
+                
+                display('score');
+                displayNeeded('Qneeded');
+            </script>
+            
         </form>
         
         <a href="/log_out"><button>Log out</button></a>
