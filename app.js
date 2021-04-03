@@ -1,12 +1,12 @@
 const express = require("express");
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
-var sessions = require('express-session');
+var session = require('express-session');
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(sessions({
+app.use(session({
     secret: 'gamification project', // this one is useless
     resave: true,
     saveUninitialized: true
@@ -30,7 +30,7 @@ connection.connect();
 // check if user is authenticated
 function check_authenticated(req, res, next) {
     console.log(req.session.authenticated);
-    if(req.session.authenticated =! true) res.redirect('/');
+    if(!req.session.authenticated) res.redirect('/');
     else next();
 }
 
@@ -94,10 +94,10 @@ app.post('/into_gamepad', function(req,res){
 app.post('/create_recruiter', function(req,res){
     // console.log("hello");
     let stmt = 'INSERT INTO recruiters (name,username,password,email) VALUES (?,?,?,?)';
-     console.log(req.body.name);
-     console.log(req.body.username);
-     console.log(req.body.password);
-     console.log(req.body.email);
+    //  console.log(req.body.name);
+    //  console.log(req.body.username);
+    //  console.log(req.body.password);
+    //  console.log(req.body.email);
     let data = [req.body.name,req.body.username,req.body.password,req.body.email];
     // console.log(data);
     connection.query(stmt, data, function(error, result){
@@ -217,7 +217,7 @@ app.get('/log_out', check_authenticated ,function(req, res) {
 // if the recruiter wants to search the candidate
 app.get('/get_candidate/:id', function(req, res) {
     
-    var stmt = "SELECT * FROM candidates LEFT JOIN simon_says ON simon_says.simon_says_user=candidates.candidate_id LEFT JOIN where_my_error ON where_my_error.where_my_error_user=candidates.candidate_id "+
+    var stmt = "SELECT * FROM candidates LEFT JOIN bot_says ON bot_says.bot_says_user=candidates.candidate_id LEFT JOIN where_my_error ON where_my_error.where_my_error_user=candidates.candidate_id "+
     "LEFT JOIN fast_or_faster ON fast_or_faster.fast_or_faster_user=candidates.candidate_id LEFT JOIN categories ON categories.categories_user=candidates.candidate_id LEFT JOIN game_pad ON game_pad.game_pad_user=candidates.candidate_id "+
     "WHERE candidates.candidate_id=? ;";
     var data = [req.params.id];
@@ -228,6 +228,29 @@ app.get('/get_candidate/:id', function(req, res) {
             res.json({result: true, data: result[0]});
         }
     });
+});
+
+
+app.get('/bot_says', check_authenticated ,function(req, res) {
+    res.render('bot_says');
+});
+
+app.post('/inputBotSays', function(req, res) {
+    console.log("yo, it made it", req.body);
+    console.log("yo, this is the candidate's stuff", req.session.candidateInfo)
+    
+    var stmt2 = 'INSERT INTO bot_says (bot_says_user, bot_says_points, bot_says_start_time, bot_says_end_time, bot_says_completed) VALUES(?,?,?,?,?) ' +
+                'ON DUPLICATE KEY UPDATE bot_says_points=VALUES(bot_says_points), bot_says_start_time=VALUES(bot_says_start_time), bot_says_end_time=VALUES(bot_says_end_time);'
+
+    var data2 = [req.session.candidateInfo.candidate_id, Number(req.body.points), req.body.time1, req.body.time2, true, Number(req.body.points), req.body.time1, req.body.time2, req.body.time2]
+
+    connection.query(stmt2, data2, function(error, result) {
+        if (error) throw error;
+        else {
+            console.log("success!")
+            res.redirect('/candidate_loggedin')
+        }
+    })
 });
 
 

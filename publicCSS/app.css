@@ -17,3 +17,10 @@ body {
 main{
     flex: 1;
 }
+
+.bot_says_game{
+    background-color: lightyellow;
+    margin-left: 125px;
+    margin-right: 125px;
+}
+
