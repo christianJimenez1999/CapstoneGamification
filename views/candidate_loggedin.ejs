@@ -15,9 +15,17 @@
         
         <div>
             <h1>Candidate logged in</h1>
+<<<<<<< HEAD
             <h3>Hello <%= candidate.canID%></h3>
             <a href='/bot_says'><button>Bot says</button></a>
+=======
+            <h3>Hello candidate: <%= candidate.candidate_id%></h3>
+>>>>>>> main
         </div>
+        
+        <form action='/into_gamepad' method='POST'>
+            <button class="btn btn-link">Game Pad</button>
+        </form>
         
         <a href="/log_out"><button>Log out</button></a>
         
