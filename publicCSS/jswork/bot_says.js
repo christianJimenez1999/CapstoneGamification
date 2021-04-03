@@ -8,7 +8,7 @@ var lives = 4;
 // var difficulty = "mid"
 var difficulty = "intro"
 
-var nextQuestionNum = 4; 
+var nextQuestionNum = 1; 
 
 var levelUp = 1 // every 2 questions increase difficulty, never down
 var totalPoints = 0
@@ -34,7 +34,8 @@ function appendHuman(middle_material) {
         // internalHumanCount += 1
         
         var humanPartA = "<div class='container border border-primary float-left rounded-lg'  style='border-width:5px !important; background-color: #e4e7ff;' id=inputs" +internalHumanCount + ">"
-        var humanPartB = "<br><div style='width:20%; margin:auto;'><button class='btn btn-success' id='inputsButton' onClick='checkInputs()'>Done</button></div></div><br><br>"
+        var humanPartB = "<br><div class='row' style='width:20%; margin:auto;'><button class='btn btn-success col-lg' style='width:150px;' id='inputsButton' onClick='checkInputs()'>Done!</button>"+
+        "<img class='col-lg' id='timer' src='https://imgur.com/KrK7bi4.gif?"+Math.random()+"'></div></div><br><br>"
         
         // $("#simon_says_game").prepend(humanPartA + middle_material+ internalHumanCount + humanPartB)
         $("#bot_says_game").prepend(humanPartA + middle_material + humanPartB)
@@ -47,6 +48,7 @@ function checkInputs() { // we know what to check based on the internalHumanCoun
         
         var currentParent = $("#inputs"+internalHumanCount);
         currentParent.find("#inputsButton").hide();
+        $("#timer").remove();
         // var current = currentParent.find("#inputA0").val();
         
         var scoreCounter = {};
@@ -136,6 +138,10 @@ function maker() {
 
 function completedAll() { // have some modal or something
     console.log("\n\nCONGRATS u did the entire game!")
+    
+    $("#feedbackL").hide().html("<img id='explosion' src='https://bestanimations.com/media/fireworks2/1589967346ba-pretty-delicate-firework-animated-gif-image.gif#.YGa71ze3z8A.link' style='height:100px;width:150px;'>").show()
+    $("#feedbackR").hide().html("<img id='explosion' src='https://bestanimations.com/media/fireworks2/1589967346ba-pretty-delicate-firework-animated-gif-image.gif#.YGa71ze3z8A.link' style='height:100px;width:150px;'>").show()
+    
     displayEndButtons()
 }
 
@@ -153,17 +159,17 @@ function displayEndButtons() {
     
     var formatted2 = time2.getFullYear() + "-"+ (time2.getMonth() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + "-" + time2.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + " " + time2.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ":" +time2.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ":" +time2.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
     
-    var partA = "<div class='container row' style='width:25%; margin:auto;'>"
+    var partA = "<div class='container row rounded-lg border border-info' style='width:30%; margin:auto; background:#b4f3ff; padding:12px;'>"
     
     var input =
-            "<form class='col-sm' action='/inputBotSays' method='POST'>" +
+            "<form class='col-md' action='/inputBotSays' method='POST'>" +
                 "<input hidden type='text' id='time1' name='time1' value='"+formatted1+"'>" + 
                 "<input hidden type='text' id='time2' name='time2' value='"+formatted2+"'>" +
                 "<input hidden type='number' id='points' name='points' value='"+totalPoints +"'>" +
                 "<input class='btn btn-success' type='submit' value='Submit score!'>" +
             "</form>"
             
-    var input2 = "<a class='col-sm' href='/bot_says'><button class='btn btn-info'>redo!</button></a>"
+    var input2 = "<a class='col-md' href='/bot_says'><button class='btn btn-info'>redo!</button></a>"
     var partB = "</div>"
     
     $('#endDiv').html(partA+input+input2+partB)
@@ -215,8 +221,7 @@ function controller() {
                   else{
                       console.log("NO TIMEOUT!");
                   }
-                //do something special
-              }, 20000);
+              }, 30050); // this is a little more than 30 seconds
             
         }
         
