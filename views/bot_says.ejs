@@ -9,10 +9,14 @@
 	        <link rel='stylesheet' type='text/css' href='app.css'>
     </head>
     
-    <body>
+    <body style='background: linear-gradient(0deg, rgba(255,241,176,1) 6%, rgba(255,192,180,1) 80%); '>
         <title>Bot Says</title>
-        <div class="header">
-            <h1>Bot Says</h1>
+        <div class="header row">
+            <div class="col-sm" id="feedbackL"></div>
+            
+            <h1 class='col-sm container display-3' style='padding-bottom: 20px;'>Bot Says</h1>
+            
+            <div class="col-sm" id="feedbackR"></div>
         </div>
         
         <div id="endDiv">
@@ -23,18 +27,24 @@
         <!--<button onClick='appendHuman("potatoe")'>testerHuman</button> <!--THIS WAS FOR TESTING-->
 
         <div class="container" id="display_game_statistics">
-            <div id="points"><h3>0</h3></div>
-            <div id="lives"><h3>4</h3></div>
+            <div class="row" style='padding: 30px;'>
+                
+                <div class="col-sm" id="points" style='background: lightyellow;'><h3>0</h3></div>
+                <div class="col-sm" id="lives"><h3 style='background: linear-gradient(90deg, cyan 38%, green 100%); height: 100%;'>4</h3></div>
+                <div class="col-sm" id="difficulty"><h3 style='background-image: linear-gradient(to right, cyan , green); height: 100%;'>intro</h3></div>
+                
+            </div>
         </div>
         
-        <div class="bot_says_game" id="bot_says_game">  <!--the class for this div is in the app.css-->
+        <div class="bot_says_game rounded-lg" id="bot_says_game">  <!--the class for this div is in the app.css-->
             <!--<h10>potatoe</h10>-->
-                <div class='container border border-danger float-right'><h4>Some explaination</h4>
+                <div class='container border border-danger float-right rounded-lg' style='border-width:4px !important; background-color: #ffe0dd;'><h4>Some explaination</h4>
                 </div><br>
                 
-                <div class='container border border-primary float-left'>
-                    <h4>Some gif demo</h4>
-                <br><button id='inputsButton' onClick='controller()'>Ready?</button></div><br><br>
+                <div class='container border border-primary float-left rounded-lg' style='border-width:6px !important; background-color: #e4e7ff;'>
+                    <h4 style='text-align: center;'>Some gif demo</h4>
+                    
+                <br><button class='btn btn-success' id='inputsButton' onClick='controller()'>Ready?</button></div><br><br>
         </div>
         
         

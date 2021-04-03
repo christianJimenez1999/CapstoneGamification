@@ -214,16 +214,9 @@ app.get('/bot_says', check_authenticated ,function(req, res) {
     res.render('bot_says');
 });
 
-function checkExistsInTable(list) {
-    
-}
-
 app.post('/inputBotSays', function(req, res) {
     console.log("yo, it made it", req.body);
     console.log("yo, this is the candidate's stuff", req.session.candidateInfo)
-    
-    // var stmt = 'INSERT INTO bot_says (bot_says_user, bot_says_points, bot_says_start_time, bot_says_end_time, bot_says_completed) VALUES (?,?,?,?,?) ';
-    // var data = [req.session.candidateInfo.candidate_id, req.body.points, req.body.time1, req.body.time2, true]
     
     var stmt2 = 'INSERT INTO bot_says (bot_says_user, bot_says_points, bot_says_start_time, bot_says_end_time, bot_says_completed) VALUES(?,?,?,?,?) ' +
                 'ON DUPLICATE KEY UPDATE bot_says_points=VALUES(bot_says_points), bot_says_start_time=VALUES(bot_says_start_time), bot_says_end_time=VALUES(bot_says_end_time);'

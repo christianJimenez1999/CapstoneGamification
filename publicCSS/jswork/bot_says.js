@@ -19,8 +19,10 @@ var time2;
 function appendBot(middle_material) {
     $(document).ready(function() {
         
-        var botPartA = "<div class='container border border-danger float-right'>"
-        var botPartB = "</div><br>"
+        var botPartA = "<div class='container border border-danger float-right rounded-lg' id=bot"+internalBotCount+" style='padding: 15px; background-color: #ffe0dd; border-width:4px !important;'><h4>"
+        
+        // var botPartB = "</h4>"+polka+"</div><br>"
+        var botPartB = "</h4></div><br>"
         // internalBotCount += 1;
         // $("#simon_says_game").prepend(botPartA + middle_material+ internalBotCount + botPartB)
         $("#bot_says_game").prepend(botPartA + middle_material + botPartB)
@@ -31,8 +33,8 @@ function appendHuman(middle_material) {
     $(document).ready(function() {
         // internalHumanCount += 1
         
-        var humanPartA = "<div class='container border border-primary float-left' id=inputs" +internalHumanCount + ">"
-        var humanPartB = "<br><button id='inputsButton' onClick='checkInputs()'>Done</button></div><br><br>"
+        var humanPartA = "<div class='container border border-primary float-left rounded-lg'  style='border-width:5px !important; background-color: #e4e7ff;' id=inputs" +internalHumanCount + ">"
+        var humanPartB = "<br><div style='width:20%; margin:auto;'><button class='btn btn-success' id='inputsButton' onClick='checkInputs()'>Done</button></div></div><br><br>"
         
         // $("#simon_says_game").prepend(humanPartA + middle_material+ internalHumanCount + humanPartB)
         $("#bot_says_game").prepend(humanPartA + middle_material + humanPartB)
@@ -73,9 +75,14 @@ function checkInputs() { // we know what to check based on the internalHumanCoun
         
         var num_right = Object.keys(scoreCounter).length;
         
+        let botParent = $("#bot"+(internalBotCount-1))
         if(num_right == questions[difficulty][nextQuestionNum]['human']['input_count']){
             levelUp += 3;
             console.log("ALL RIGHT BOI");
+            // botParent.append("<img id='explosion' src='https://bestanimations.com/media/fireworks2/1589967346ba-pretty-delicate-firework-animated-gif-image.gif#.YGa71ze3z8A.link' style='height:200px;width:250px;'>")
+            $("#feedbackL").hide().html("<img id='explosion' src='https://bestanimations.com/media/fireworks2/1589967346ba-pretty-delicate-firework-animated-gif-image.gif#.YGa71ze3z8A.link' style='height:100px;width:150px;'>").show().fadeOut(3000)
+            $("#feedbackR").hide().html("<img id='explosion' src='https://bestanimations.com/media/fireworks2/1589967346ba-pretty-delicate-firework-animated-gif-image.gif#.YGa71ze3z8A.link' style='height:100px;width:150px;'>").show().fadeOut(3000)
+            
         }
         else if(num_right / questions[difficulty][nextQuestionNum]['human']['input_count'] >= 0.55){
             levelUp += 1;
@@ -83,16 +90,18 @@ function checkInputs() { // we know what to check based on the internalHumanCoun
         }
         else if(num_right / questions[difficulty][nextQuestionNum]['human']['input_count'] <= 0.30){
             lives -= 1;
-            $("#lives").html("<h3>" + lives + "</h3>")
+            $("#lives").html("<h3 style="+life_colors[lives]+"; height: 100%>" + lives + "</h3>")
             console.log("BIG OOF, lives at", lives);
         }
         else{ // what to here? subtract a life? if they get stuck then oof
             console.log("ok oof");
         }
         
+        // var animation = botParent.find('#explosion').fadeOut(3500)
+        
         // console.log("did it delete?", questions[difficulty])
         totalPoints += num_right * point_distribution[difficulty];
-        $("#points").html("<h3>" + totalPoints + "</h3>")
+        $("#points").hide().html("<h3>" + totalPoints + "</h3>").fadeIn('slow')
         
         delete questions[difficulty][nextQuestionNum]; // get rid of the question
         controller();
@@ -105,7 +114,7 @@ function maker() {
     $(document).ready(function() {
         console.log("NEXT QUESTION NUM", nextQuestionNum)
         console.log("DIFFICULTY", difficulty)
-        var humanInputA = "<h3>"+questions[difficulty][nextQuestionNum]['human']['name']+
+        var humanInputA = "<div style='width:20%; margin:auto;'><h3>"+questions[difficulty][nextQuestionNum]['human']['name']+
         "</h3><br><table><tr><th>name</th><th>type</th></tr>"
         var humanInputB = ""
         
@@ -115,7 +124,7 @@ function maker() {
             humanInputB += "<tr><td><input id=inputA"+i+"></td><td><input id=inputB"+i+"></td></tr>";
         } 
         
-        var humanInputC = "</table>"
+        var humanInputC = "</table></div>"
         
         appendHuman(humanInputA+humanInputB+humanInputC)
         appendBot(questions[difficulty][nextQuestionNum]['bot'])
@@ -144,16 +153,20 @@ function displayEndButtons() {
     
     var formatted2 = time2.getFullYear() + "-"+ (time2.getMonth() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + "-" + time2.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + " " + time2.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ":" +time2.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ":" +time2.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
     
+    var partA = "<div class='container row' style='width:25%; margin:auto;'>"
+    
     var input =
-            "<form action='/inputBotSays' method='POST'>" +
+            "<form class='col-sm' action='/inputBotSays' method='POST'>" +
                 "<input hidden type='text' id='time1' name='time1' value='"+formatted1+"'>" + 
                 "<input hidden type='text' id='time2' name='time2' value='"+formatted2+"'>" +
                 "<input hidden type='number' id='points' name='points' value='"+totalPoints +"'>" +
-                "<input type='submit' value='Submit score!'>" +
+                "<input class='btn btn-success' type='submit' value='Submit score!'>" +
             "</form>"
             
+    var input2 = "<a class='col-sm' href='/bot_says'><button class='btn btn-info'>redo!</button></a>"
+    var partB = "</div>"
     
-    $('#endDiv').html(input)
+    $('#endDiv').html(partA+input+input2+partB)
 }
 
 function controller() {
@@ -170,9 +183,11 @@ function controller() {
         if(levelUp >= level_distribution[difficulty]) { // update difficulty
             if(difficulty == "intro") {
                 difficulty = "mid";
+                $('#difficulty').hide().html("<h3 style='background-image: linear-gradient(to right, yellow , red); height: 100%'>mid</h3>").fadeIn('slow')
             }
             else{
                 difficulty = "hard";
+                $('#difficulty').html("<h3 style='background-image: linear-gradient(to right, pink , purple); height: 100%'>mid</h3>")
             }
         }
         
@@ -201,7 +216,7 @@ function controller() {
                       console.log("NO TIMEOUT!");
                   }
                 //do something special
-              }, 1000);
+              }, 20000);
             
         }
         
@@ -320,4 +335,11 @@ var point_distribution = {
 var level_distribution = { // basically to see how many points before a level up
     intro: 7, // I just made them up
     mid: 15 
+}
+
+var life_colors = {
+    3: "'background: linear-gradient(90deg, green 38%, yellow 100%);'",
+    2: "'background: linear-gradient(90deg, yellow 38%, orange 100%);'",
+    1: "'background: linear-gradient(90deg, orange 38%, red 100%);'",
+    0: "'background: linear-gradient(90deg, red 38%, red 100%);'"
 }
