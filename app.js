@@ -242,7 +242,11 @@ app.post('/inputBotSays', function(req, res) {
             console.log("success!")
             res.redirect('/candidate_loggedin')
         }
-    })
+    });
+});
+
+app.get('/where_my_error', check_authenticated, function(req, res) {
+    res.render('where_my_error');
 });
 
 
