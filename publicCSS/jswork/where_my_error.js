@@ -1,11 +1,11 @@
 console.log("I EXISTS :D");
 
 var correct = 0
-var gotten = 0
+var gotten = 0 // number of questions taken
 
 var lives = 4
 
-var currentQuestion = 0
+var currentQuestion = 5
 var tempQuestion = 0
 
 var difficulty = "start";
@@ -19,14 +19,14 @@ function controller() { // check difficulty and the
         console.log("COURAGE THE COWARDLY DOG SAYS: YAY!")
     
     
-    if(difficulty="Syntax"){ // only progress on the complete cycle
+    if(difficulty=="Syntax"){ // only progress on the complete cycle
         currentQuestion += 1;
     }
     
     difficulty = pointing[difficulty] // move to the other one
     // $("#type").html(difficulty)
     
-    if(currentQuestion > 5) { // don't go over
+    if(currentQuestion > 6) { // don't go over
         currentQuestion = 1
     }
     
@@ -136,7 +136,7 @@ function newQuestion(question, inputs) {
         
         let parentDiv = $('#where_my_error_game')
         
-        let partA = "<div class='row' id='single"+currentQuestion+"'> <div class='col-sm'>"
+        let partA = "<div class='row' id='single"+currentQuestion+"'> <div class='col-sm'><p>Console output:</p>"
         
         let partB = "<div class='row'>TIMER HERE</div></div>"
         
@@ -159,14 +159,46 @@ var questions = { // questions go log -> run -> syn -> log
             question: "Hello!",
             lines: ["1 #include &lt;iostream&gt;", "2 using namespace std;", "3 ", "4 int main() {", "5 &nbsp;&nbsp; string my_string = \"Hello!\";",
             "6 ", "7&nbsp;&nbsp; for(int var = 0; var < my_string.size(); var++);", "8&nbsp;&nbsp;&nbsp;&nbsp; cout << my_string;", "9 }"],
-            correct: 8
+            correct: 7
+        },
+        2:{
+            question: "24",
+            lines:["1 #include&lt;iostream&gt;", "2 using namespace std;", "3 ", "4 int main () {", "5&nbsp;&nbsp; int a = 4,b = 2,c = 40;", "6&nbsp;&nbsp; cout << a + c / b;",
+            "7&nbsp;&nbsp; cout << a + c / b;", "8 }"],
+            correct: 7
+        },
+        3:{
+            question: "1 2 3 4 5 6 7 8 9 3 -2121793516",
+            lines:["1 #include&lt;iostream&gt;", "2 using namespace std;", "3 ", "4 int main () {", "5&nbsp;&nbsp; int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};",
+            "6 ", "7&nbsp;&nbsp; for(int iter = 0; iter<=10; iter++)", "8&nbsp;&nbsp;&nbsp;&nbsp; cout<< numbers[iter] << \" \";", "9 }"],
+            correct: 7
+        },
+        4:{
+            question:"Hello!",
+            lines:["1 #include&lt;iostream&gt;", "2 using namespace std;", "3 ", "4 int main () {","5&nbsp;&nbsp; int x = 3;", "6&nbsp;&nbsp; if(4 < x < 8)",
+            "7&nbsp;&nbsp;&nbsp;&nbsp; cout << \"Hello!\";","8&nbsp;&nbsp; else", "9&nbsp;&nbsp;&nbsp;&nbsp; cout << \"Morning!\";", "10&nbsp;&nbsp; return 0;",
+            "11 }"],
+            correct:6
+        },
+        5:{
+            question:"-3",
+            lines:["1 #include&lt;iostream&gt;", "2 using namespace std;", "3 ", "4 int main () {", "5 ", "6&nbsp;&nbsp; float num;","7&nbsp;&nbsp; num= 10^38 - (10^38 - 1);",
+            "8&nbsp;&nbsp; cout << num;", "9&nbsp;&nbsp; return 0;", "10 }"],
+            correct:6
+        },
+        6:{
+            question:"Do not match!",
+            lines:["1 #include&lt;iostream&gt;", "2 using namespace std;", "3 ", "4 int main () {", "5 ", "6&nbsp;&nbsp; char char1 = 'b', char2 = 'b';",
+            "7&nbsp;&nbsp; char* p1 = &char1; char* p2 = &char2;", "8&nbsp;&nbsp; if(p1 != p2)", "9&nbsp;&nbsp;&nbsp;&nbsp; cout <<\"Do not match!\"",
+            "10&nbsp;&nbsp; return 0;", "11 }"],
+            correct:8
         }
     },
     Syntax: {
         1:{
             question: "error: assigning to 'int' from incompatible type 'int *'",
             lines: ["1 #include &lt;iostream&gt;", "2 using namespace std;", "3 ", "4 using namespace std;", "5 int main() {", "6&nbsp;&nbsp; int* p1, p2;", "7&nbsp;&nbsp; n=20;",
-            "8&nbsp;&nbsp; p1 = &n;","9&nbsp;&nbsp; p2=&n", "10}"],
+            "8&nbsp;&nbsp; p1 = &n;","9&nbsp;&nbsp; p2=&n;", "10}"],
             correct: 9
         },
         2:{
@@ -182,7 +214,7 @@ var questions = { // questions go log -> run -> syn -> log
         },
         4:{
             question: "error: linker command failed with exit code 1",
-            lines: ["1 #include &lt;iostream&gt;", "2 #include &lt;string&gt;", "3 int Main() {", "4 ", "5&nbsp;&nbsp; int a=4, b=6, c=10", "6&nbsp;&nbsp; printf(\"\nThe addition of %d and %d is = %d\",a,b,c);",
+            lines: ["1 #include &lt;iostream&gt;", "2 #include &lt;string&gt;", "3 int Main() {", "4 ", "5&nbsp;&nbsp; int a=4, b=6, c=10;", "6&nbsp;&nbsp; printf(\"\nThe addition of %d and %d is = %d\",a,b,c);",
             "7 }"],
             correct: 3
         },
@@ -205,7 +237,7 @@ var questions = { // questions go log -> run -> syn -> log
 
 let pointing={
     start:"Logical",
-    Logical:"Run_time",
-    Run_time:"Syntax",
+    Logical:"Syntax", // this was pointing at Run_time
+    // Run_time:"Syntax", // I can't come up with a fair run time error
     Syntax:"Logical"
 }
