@@ -2,11 +2,14 @@ console.log("I EXISTS :D");
 
 var correct = 0
 var gotten = 0 // number of questions taken
+var time1 = new Date();
+var time2;
 
 var lives = 4
 
 var currentQuestion = 5
-var tempQuestion = 0
+// var tempQuestion = 0
+var botCount = 0
 
 var difficulty = "start";
 
@@ -39,9 +42,9 @@ function controller() { // check difficulty and the
         finalize()
         return;
     }
-    else{
+    else{ // put a question here
     
-        tempQuestion = currentQuestion;
+        var tempQuestion = botCount;
         
         canClick = true;
         
@@ -51,7 +54,8 @@ function controller() { // check difficulty and the
         setTimeout(
           function() 
           {
-              if(tempQuestion == currentQuestion){
+              if(tempQuestion == botCount){
+                //   console.log("timer")
                   checkAnswer();
               }
               else{
@@ -66,17 +70,40 @@ function controller() { // check difficulty and the
 
 function finalize() {
     console.log("THE END")
+    time2 = new Date();
+    var formatted1 = time1.getFullYear() + "-"+ (time1.getMonth() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + "-" + time1.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + " " + time1.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ":" +time1.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ":" +time1.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+    
+    var formatted2 = time2.getFullYear() + "-"+ (time2.getMonth() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + "-" + time2.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + " " + time2.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ":" +time2.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ":" +time2.getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+    
+    var partA = "<div class='container row rounded-lg border border-info' style='width:30%; margin:auto; background:#b4f3ff; padding:12px;'>"
+    
+    var input =
+            "<form class='col-md' action='/inputWhereMyError' method='POST'>" +
+                "<input hidden type='text' id='time1' name=x'time1' value='"+formatted1+"'>" + 
+                "<input hidden type='text' id='time2' name='time2' value='"+formatted2+"'>" +
+                "<input hidden type='number' id='correct' name='correct' value='"+correct +"'>" +
+                "<input hidden type='number' id='wrong' name='wrong' value='"+(gotten - correct) +"'>" +
+                "<input class='btn btn-success' type='submit' value='Submit score!'>" +
+            "</form>"
+            
+    var input2 = "<a class='col-md' href='/where_my_error'><button class='btn btn-info'>redo!</button></a>"
+    var partB = "</div>"
+    
+    $('#finisher').html(partA+input+input2+partB);
+    $("#leftExplode").show().html("<img style='width:50px; height:50px;' src='https://bestanimations.com/media/fireworks2/505664765fireworks-animated-gif-10-2.gif'></img>")
+    $("#rightExplode").show().html("<img style='width:50px; height:50px;' src='https://bestanimations.com/media/fireworks2/505664765fireworks-animated-gif-10-2.gif'></img>")
+
 }
 
 function maker() {
     
-    var partA = "<div class='col-md'>"
+    var partA = "<div class='container col-md' style='background:rgba(255,255,255,.6); margin: 5px;'>"
     var buttons = ""
     var partB = "</div>";
     
     var i;
     for(i=0; i < questions[difficulty][currentQuestion]['lines'].length; i++) { // so for the dblclick, the onClick gets triggered!
-        buttons += "<button class='row' id='button"+(i+1)+"' style='width:100%' onClick='setAnswer("+(i+1)+")' ondblclick='checkAnswer()'>" + questions[difficulty][currentQuestion]['lines'][i] + "</button>"
+        buttons += "<button class='row' id='button"+(i+1)+"' style='width:100%; border:solid; background:none; border-width:1px; padding:4px;' onClick='setAnswer("+(i+1)+")' ondblclick='checkAnswer()'>" + questions[difficulty][currentQuestion]['lines'][i] + "</button>"
     } 
     
     newQuestion(questions[difficulty][currentQuestion]['question'], partA+buttons+partB);
@@ -100,6 +127,7 @@ function setAnswer(num) { // done
 
 function checkAnswer() { // implement the actual checking stuff
     /// once the timer or the user dblclicks then just don't let them.
+    botCount += 1
     if (canClick) {
         canClick = false;
     }
@@ -113,15 +141,19 @@ function checkAnswer() { // implement the actual checking stuff
     if(answer == questions[difficulty][currentQuestion]["correct"]){
         console.log("KATS SAYS: ssassy success")
         correct += 1;
-        $("#correct").html(correct)
+        $("#correct").hide().html(correct).fadeIn('slow')
+        $("#leftExplode").show().html("<img style='width:50px; height:50px;' src='https://bestanimations.com/media/fireworks2/505664765fireworks-animated-gif-10-2.gif'></img>").fadeOut(1000)
+        $("#rightExplode").show().html("<img style='width:50px; height:50px;' src='https://bestanimations.com/media/fireworks2/505664765fireworks-animated-gif-10-2.gif'></img>").fadeOut(1000)
+        
     }
     else{
         console.log("KATS SAYS: failure doggy")
         lives -= 1;
-        $("#lives").html(lives)
+        $("#lives").hide().html("<h5 style='background:"+background[lives]+"'>"+lives+"</h5>").fadeIn('slow')
+        
     }
     gotten += 1
-    $("#gotten").html(gotten)
+    $("#gotten").hide().html(gotten).fadeIn('slow')
     
     
     delete questions[difficulty][currentQuestion]; // get rid of the question
@@ -136,9 +168,9 @@ function newQuestion(question, inputs) {
         
         let parentDiv = $('#where_my_error_game')
         
-        let partA = "<div class='row' id='single"+currentQuestion+"'> <div class='col-sm'><p>Console output:</p>"
+        let partA = "<div class='row' id='single"+currentQuestion+"'> <div class='col-sm'><p style='background:rgba(255,255,255,.6); margin: 5px;'>Console output:<br>"
         
-        let partB = "<div class='row'>TIMER HERE</div></div>"
+        let partB = "</p><div class='row' style='background:rgba(255,255,255,.6); margin: 5px;'>TIMER HERE</div></div>"
         
         let partC = "</div>"
         
@@ -240,4 +272,12 @@ let pointing={
     Logical:"Syntax", // this was pointing at Run_time
     // Run_time:"Syntax", // I can't come up with a fair run time error
     Syntax:"Logical"
+}
+
+let background={
+    4: "linear-gradient(50deg, rgba(34,193,195,1) 0%, rgba(42,50,219,1) 50%, rgba(186,45,253,1) 100%);",
+    3: "linear-gradient(50deg, rgba(34,195,54,1) 0%, rgba(34,193,195,1) 50%, rgba(42,50,219,1) 100%);",
+    2: "linear-gradient(50deg, rgba(252,252,51,1) 0%, rgba(34,195,1,1) 50%, rgba(34,193,195,1) 100%);",
+    1: "linear-gradient(50deg, rgba(252,93,51,1) 0%, rgba(252,252,51,1) 50%, rgba(34,195,1,1) 100%);",
+    0: "linear-gradient(50deg, rgba(252,51,51,1) 0%, rgba(252,93,51,1) 50%, rgba(252,252,51,1) 100%);"
 }
