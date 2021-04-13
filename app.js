@@ -235,7 +235,7 @@ app.post('/inputBotSays', function(req, res) {
                 'ON DUPLICATE KEY UPDATE bot_says_points=VALUES(bot_says_points), bot_says_start_time=VALUES(bot_says_start_time), bot_says_end_time=VALUES(bot_says_end_time);'
 
     var data2 = [req.session.candidateInfo.candidate_id, Number(req.body.points), req.body.time1, req.body.time2, true, Number(req.body.points), req.body.time1, req.body.time2, req.body.time2]
-
+    // pretty sure the last 4 values in data2 are useless
     connection.query(stmt2, data2, function(error, result) {
         if (error) throw error;
         else {
@@ -247,6 +247,25 @@ app.post('/inputBotSays', function(req, res) {
 
 app.get('/where_my_error', check_authenticated, function(req, res) {
     res.render('where_my_error');
+});
+
+app.post('/inputWhereMyError', function(req, res) {
+    console.log("yo, it made it", req.body);
+    console.log("yo, this is the candidate's stuff", req.session.candidateInfo);
+    
+    var stmt2 = 'INSERT INTO where_my_error (where_my_error_user, where_my_error_correct, where_my_error_wrong , where_my_error_start_time, where_my_error_end_time, where_my_error_completed) VALUES(?,?,?,?,?,?) ' +
+                'ON DUPLICATE KEY UPDATE where_my_error_correct=VALUES(where_my_error_correct), where_my_error_wrong=VALUES(where_my_error_wrong), where_my_error_start_time=VALUES(where_my_error_start_time), where_my_error_end_time=VALUES(where_my_error_end_time);'
+    
+    var data2 = [req.session.candidateInfo.candidate_id, Number(req.body.correct), Number(req.body.wrong), req.body.time1, req.body.time2, true]
+
+    connection.query(stmt2, data2, function(error, result) {
+        if (error) throw error;
+        else{
+            console.log("success!");
+            res.redirect('/candidate_loggedin');
+        }
+    })
+
 });
 
 

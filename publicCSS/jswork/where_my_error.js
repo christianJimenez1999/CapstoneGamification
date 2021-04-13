@@ -79,7 +79,7 @@ function finalize() {
     
     var input =
             "<form class='col-md' action='/inputWhereMyError' method='POST'>" +
-                "<input hidden type='text' id='time1' name=x'time1' value='"+formatted1+"'>" + 
+                "<input hidden type='text' id='time1' name='time1' value='"+formatted1+"'>" + 
                 "<input hidden type='text' id='time2' name='time2' value='"+formatted2+"'>" +
                 "<input hidden type='number' id='correct' name='correct' value='"+correct +"'>" +
                 "<input hidden type='number' id='wrong' name='wrong' value='"+(gotten - correct) +"'>" +
