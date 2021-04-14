@@ -14,8 +14,7 @@
     <body>
         
         <div>
-            <h1>Candidate logged in</h1>
-            <label class='font-italic font-weight-light' >GamePad section</label>
+            <h1>GamePad section</h1>
         </div>
         
         <div class='container'>
@@ -24,51 +23,44 @@
                      
                     <strong>
                         <p>Welcome to our fundemantal games answer to the best of your capabilities!</p>
-                        <div id='score'></div>
-                        
-                        <script>
-                            function display(id){
-                                var text = document.getElementById(id);
-                                text.innerHTML = "score: " + localStorage["score"];
-                            }
-                            display('score');
-                        </script>
+                        <p class="font-italic" > Three lives per quesiton. Lose all three and question marked wrong. Good luck!</p>
                     </strong>
                     
-                    <input id='answer' name='answer' placeholder'insert answer here' required>
-                    
-                    </br>
-                    </br>
-                    
-                    <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='one'>1</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='two'>2</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='three'>3</button>
-                        
-                    </div>
-                    <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='four' >4</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='five' >5</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='six' >6</button>
-                    </div>
-                    <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='seven' >7</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='eight' >8</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='nine' >9</button>
-                    </div>
-                    <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='zero' >0</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=c() id='clear' >Clear</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=backSpace() id='back' >backspace</button>
-                    </div>
-                    
-                    </br>
-                    
                     <form action='/is_correct' method='POST'>
-                             <button class='btn btn-primary btn-lg'>Enter</button>
+                        <input id='answer' name='answer' placeholder'insert answer here' required>
+                        
+                        </br>
+                        </br>
+                        
+                        <div class='col-sm-4'>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='one'>1</button>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='two'>2</button>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='three'>3</button>
+                            
+                        </div>
+                        <div class='col-sm-4'>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='four' >4</button>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='five' >5</button>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='six' >6</button>
+                        </div>
+                        <div class='col-sm-4'>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='seven' >7</button>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='eight' >8</button>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='nine' >9</button>
+                        </div>
+                        <div class='col-sm-4'>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='zero' >0</button>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=c() id='clear' >Clear</button>
+                            <button class='btn btn-dark btn-lg' type="button" onclick=backSpace() id='back' >backspace</button>
+                        </div>
+                        
+                        </br>
+                        <button class='btn btn-primary btn-lg'>Enter</button>
+                        
                     </form>
                     
                     <script>
+                    
                         function inputNum(num){
                             var text = document.getElementById("answer");
                             var numb = num.innerHTML;

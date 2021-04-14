@@ -66,8 +66,8 @@ create table game_pad (
 game_pad_user             integer,
 game_pad_correct          integer,
 game_pad_wrong            integer,
-game_pad_start_time       datetime,
-game_pad_end_time         datetime,
+game_pad_start_time       varchar(30),
+game_pad_end_time         varchar(30),
 game_pad_completed        boolean,
 foreign key (game_pad_user) references candidates(candidate_id)
 );
