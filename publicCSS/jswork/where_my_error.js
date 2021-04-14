@@ -7,7 +7,7 @@ var time2;
 
 var lives = 4
 
-var currentQuestion = 5
+var currentQuestion = 1
 // var tempQuestion = 0
 var botCount = 0
 
@@ -61,7 +61,7 @@ function controller() { // check difficulty and the
               else{
                   console.log("NO TIMEOUT!");
               }
-          }, 5050); // this is a little more than 5 seconds
+          }, 20050); // this is a little more than 20 seconds
         
     }
     
@@ -103,7 +103,8 @@ function maker() {
     
     var i;
     for(i=0; i < questions[difficulty][currentQuestion]['lines'].length; i++) { // so for the dblclick, the onClick gets triggered!
-        buttons += "<button class='row' id='button"+(i+1)+"' style='width:100%; border:solid; background:none; border-width:1px; padding:4px;' onClick='setAnswer("+(i+1)+")' ondblclick='checkAnswer()'>" + questions[difficulty][currentQuestion]['lines'][i] + "</button>"
+        buttons += "<button class='row' id='button"+(i+1)+"' style='width:100%; border:solid; background:none; border-width:1px; padding:4px; font-size: 20px;'"+
+        " onClick='setAnswer("+(i+1)+")' ondblclick='checkAnswer()'>" + questions[difficulty][currentQuestion]['lines'][i] + "</button>"
     } 
     
     newQuestion(questions[difficulty][currentQuestion]['question'], partA+buttons+partB);
@@ -168,9 +169,10 @@ function newQuestion(question, inputs) {
         
         let parentDiv = $('#where_my_error_game')
         
-        let partA = "<div class='row' id='single"+currentQuestion+"'> <div class='col-sm'><p style='background:rgba(255,255,255,.6); margin: 5px;'>Console output:<br>"
+        let partA = "<div class='row' id='single"+currentQuestion+"'> <div class='col-sm'><div style='background:rgba(255,255,255,.6); margin: 5px; padding:5px;'>Console output:<br><h3>"
         
-        let partB = "</p><div class='row' style='background:rgba(255,255,255,.6); margin: 5px;'>TIMER HERE</div></div>"
+        let partB = "</h3></div><div class='row' style='background:rgba(255,255,255,.6); margin: 5px; padding:5px;'><img src='https://i.imgur.com/8nbpeNt.gif?"+
+        Math.random()+"' style='text-align:center'></div></div>"
         
         let partC = "</div>"
         
@@ -195,7 +197,7 @@ var questions = { // questions go log -> run -> syn -> log
         },
         2:{
             question: "24",
-            lines:["1 #include&lt;iostream&gt;", "2 using namespace std;", "3 ", "4 int main () {", "5&nbsp;&nbsp; int a = 4,b = 2,c = 40;", "6&nbsp;&nbsp; cout << a + c / b;",
+            lines:["1 #include&lt;iostream&gt;", "2 using namespace std;", "3 ", "4 int main () {", "5&nbsp;&nbsp; int a = 4,b = 2,c = 40;", "6&nbsp;&nbsp; ",
             "7&nbsp;&nbsp; cout << a + c / b;", "8 }"],
             correct: 7
         },
