@@ -341,7 +341,7 @@ app.post('/is_correct2', async function(req, res) {
     let ran2 = randomnum();
     let route2 = path(ran2);
     let trying2 = req.body.answer;
-    if(trying2 == 0024){
+    if(trying2 == 6624){
         GPcorrect = GPcorrect + 1;
         console.log("GPcorrect " + GPcorrect);
         array.push(ran2);
