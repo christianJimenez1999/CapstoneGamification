@@ -300,7 +300,7 @@ app.post('/is_correct', function(req,res){
     
     let trying = req.body.answer;
     
-    if(trying == 15){
+    if(trying == 1255){
         GPcorrect = GPcorrect + 1;
         console.log("GPcorrect " + GPcorrect);
         array.push(ran);
@@ -341,7 +341,7 @@ app.post('/is_correct2', async function(req, res) {
     let ran2 = randomnum();
     let route2 = path(ran2);
     let trying2 = req.body.answer;
-    if(trying2 == 20){
+    if(trying2 == 0024){
         GPcorrect = GPcorrect + 1;
         console.log("GPcorrect " + GPcorrect);
         array.push(ran2);
@@ -396,7 +396,7 @@ app.post('/is_correct3', async function(req, res) {
     let ran3 = randomnum();
     let route3 = path(ran3);
     let trying3 = req.body.answer;
-    if(trying3 == 35){
+    if(trying3 == 9909){
         GPcorrect = GPcorrect + 1;
         console.log("GPcorrect " + GPcorrect);
         array.push(ran3);
@@ -452,7 +452,7 @@ app.post('/is_correct4', async function(req, res) {
     let ran4 = randomnum();
     let route4 = path(ran4);
     let trying4 = req.body.answer;
-    if(trying4 == 35){
+    if(trying4 == 8597){
         GPcorrect = GPcorrect + 1;
         console.log("GPcorrect " + GPcorrect);
         array.push(ran4);
@@ -508,7 +508,7 @@ app.post('/is_correct5', async function(req, res) {
     let ran5 = randomnum();
     let route5 = path(ran5);
     let trying5 = req.body.answer;
-    if(trying5 == 35){
+    if(trying5 == 7911){
         GPcorrect = GPcorrect + 1;
         console.log("GPcorrect " + GPcorrect);
         array.push(ran5);
@@ -564,7 +564,7 @@ app.post('/is_correct6', async function(req, res) {
     let ran6 = randomnum();
     let route6 = path(ran6);
     let trying6 = req.body.answer;
-    if(trying6 == 35){
+    if(trying6 == 9632){
         GPcorrect = GPcorrect + 1;
         console.log("GPcorrect " + GPcorrect);
         array.push(ran6);
@@ -620,7 +620,7 @@ app.post('/is_correct7', async function(req, res) {
     let ran7 = randomnum();
     let route7 = path(ran7);
     let trying7 = req.body.answer;
-    if(trying7 == 35){
+    if(trying7 == 3061){
         GPcorrect = GPcorrect + 1;
         console.log("GPcorrect " + GPcorrect);
         array.push(ran7);
@@ -676,7 +676,7 @@ app.post('/is_correct8', async function(req, res) {
     let ran8 = randomnum();
     let route8 = path(ran8);
     let trying8 = req.body.answer;
-    if(trying8 == 35){
+    if(trying8 == 5747){
         GPcorrect = GPcorrect + 1;
         console.log("GPcorrect " + GPcorrect);
         array.push(ran8);
