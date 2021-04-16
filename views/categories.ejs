@@ -15,10 +15,14 @@
         
         <div>
             <h1>Candidate logged in</h1>
-            <label class='font-italic font-weight-light' >Categories section</label>
         </div>
         
-        <div class='container'>
+        <div align='center'>
+            <h1>Categories Section</h1>
+            <h4>This is how the basic layout of the questions will be:</h4>
+        </div>
+        
+        <div class='container' id="categories_game">
             <div class='jumbotron'>
                 <div align='center'>
                      
@@ -29,55 +33,36 @@
                     <br>
                     
                     <strong>
-                        <p>*Answer Choice* AnswerChoice*</p>
-                        <p>*Answer Choice* AnswerChoice*</p>
+                        <p>*Answer Choice A*</p>
+                        <p>*Answer Choice B*</p>
+                        <p>*Answer Choice C*</p>
+                        <p>*Answer Choice D*</p>
                     </strong>
+                    
+                    <br>Enter either A, B, C, or D<br>
                     
                     <input id='answer' name='answer' placeholder'insert answer here' required>
                     
                     </br>
                     </br>
                     
-                    <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='one'>Answer 1</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='two'>Answer 2</button>
-                    </div>
-                    <div class='col-sm-4'>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='four' >Answer 3</button>
-                        <button class='btn btn-dark btn-lg' type="button" onclick=inputNum(this) id='five' >Answer 4</button>
-                    </div>
-                    
                     </br>
-                    
-                    <form action='/is_correct' method='POST'>
-                             <button class='btn btn-primary btn-lg'>Enter</button>
-                    </form>
-                    
-                    <script>
-                        function inputNum(num){
-                            var text = document.getElementById("answer");
-                            var numb = num.innerHTML;
-                            text.value = text.value + numb;
-                        }
-                        
-                    </script>
+                    <button class='btn btn-primary btn-lg'>Enter</button>
                     
                 </div>
             
                 </br>
                 </br>
-                <div align='right'>
-                    <form action='/return_candidate' method='POST'>
-                        <div class='col-sm-2'>
-                        <button class='btn btn-primary btn-sm btn-block'>Return to Menu</button>
-                        </div>
-                    </form>
-                </div>
+                
                 
             </div>
         </div>
+        
+        <div align='center'>
+            <h4>You will have 1 minute for each question.  The questions will be C++ related that scale in difficulty.  Make sense?</h4>
+            <button class='btn btn-success' id='inputsButton' onClick='getStarted()'>Start</button>
+        </div>
 
-        
-        
+        <script src='jswork/categories.js'></script>
     </body>
 </html>
