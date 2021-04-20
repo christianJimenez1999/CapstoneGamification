@@ -51,6 +51,14 @@ app.get('/candidate_login', function(req,res){
     res.render('candidate_login');
 });
 
+app.get('/into_categories', function(req,res){
+    res.render('categories');
+})
+
+app.post('/into_categories', function(req,res){
+    res.redirect('/into_categories');
+})
+
 // sends to the recruiter loggedin screen, needs the recruiter to have session
 app.get('/recruiter_loggedin', check_authenticated , function(req,res){
    res.render('recruiter_loggedin', {recruiter: req.session.userInfo});
@@ -222,7 +230,8 @@ app.post('/candidate_login', async function(req, res) {
     console.log(attempt);
     
     if(attempt) {
-        req.session.authenticated = true;
+        //req.session.authenticated = true;
+        req.session.loggedin = true;
         req.session.candidateInfo = attempt;
         res.render('candidate_loggedin', {candidate: req.session.candidateInfo})
         //res.redirect('/recruiter_loggedin');
@@ -789,7 +798,8 @@ app.get('/get_candidate/:id', function(req, res) {
 });
 
 
-app.get('/bot_says', check_authenticated ,function(req, res) {
+app.get('/bot_says', /*check_authenticated , */function(req, res) {
+    console.log(req.session.loggedin);
     res.render('bot_says');
 });
 

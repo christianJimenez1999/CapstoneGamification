@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <head>
+            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+	        <link rel='stylesheet' type='text/css' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+	        <link rel='stylesheet' type='text/css' href='app.css'>
+        </head>
+    </head>
+
+    <body>
+        
+        <div>
+            <h1>Candidate logged in</h1>
+        </div>
+        
+        <div align='center'>
+            <h1>Categories Section</h1>
+            <h4>This is how the basic layout of the questions will be:</h4>
+        </div>
+        
+        <div class='container' id="categories_game">
+            <div class='jumbotron'>
+                <div align='center'>
+                     
+                    <strong>
+                        <p>*Question Name*</p>    
+                    </strong>
+                    
+                    <br>
+                    
+                    <strong>
+                        <p>*Answer Choice A*</p>
+                        <p>*Answer Choice B*</p>
+                        <p>*Answer Choice C*</p>
+                        <p>*Answer Choice D*</p>
+                    </strong>
+                    
+                    <br>Enter either A, B, C, or D<br>
+                    
+                    <input id='answer' name='answer' placeholder'insert answer here' required>
+                    
+                    </br>
+                    </br>
+                    
+                    </br>
+                    <button class='btn btn-primary btn-lg'>Enter</button>
+                    
+                </div>
+            
+                </br>
+                </br>
+                
+                
+            </div>
+        </div>
+        
+        <div align='center'>
+            <h4>You will have 1 minute for each question.  The questions will be C++ related that scale in difficulty.  Make sense?</h4>
+            <button class='btn btn-success' id='inputsButton' onClick='getStarted()'>Start</button>
+        </div>
+
+        <script src='jswork/categories.js'></script>
+    </body>
+</html>

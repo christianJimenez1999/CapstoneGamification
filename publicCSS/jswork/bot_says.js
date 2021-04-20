@@ -26,7 +26,6 @@ function appendBot(middle_material) {
         // internalBotCount += 1;
         // $("#simon_says_game").prepend(botPartA + middle_material+ internalBotCount + botPartB)
         $("#bot_says_game").prepend(botPartA + middle_material + botPartB)
-    })
 }
 
 function appendHuman(middle_material) {
@@ -98,7 +97,6 @@ function checkInputs() { // we know what to check based on the internalHumanCoun
         else{ // what to here? subtract a life? if they get stuck then oof
             console.log("ok oof");
         }
-        
         // var animation = botParent.find('#explosion').fadeOut(3500)
         
         // console.log("did it delete?", questions[difficulty])
