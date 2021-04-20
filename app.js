@@ -68,9 +68,45 @@ app.get('/recruiter_loggedin', check_authenticated , function(req,res){
 app.get('/candidate_loggedin', check_authenticated , function(req,res){
    res.render('candidate_loggedin', {candidate: req.session.candidateInfo});
 });
+var fulldate;
 app.get('/into_gamepad', function(req,res){
+    fulldate = new Date();
+    fulldate = fulldate.toLocaleTimeString();
+    // var date = new Date();
+    // var startDate = date.getHours() + 5;
+    // var minDate = date.getMinutes();
+    // if(startDate > 12){
+    //     startDate = startDate - 12;
+    // }
+    // fulldate = startDate + ":" + minDate;
+    // console.log(startDate);
+    // console.log(minDate);
+    // console.log(fulldate);
     res.render('game_pad');
 })
+
+app.get('/game_pad2', function(req,res){
+    res.render('game_pad2');
+});
+app.get('/game_pad3', function(req,res){
+    res.render('game_pad3');
+});
+app.get('/game_pad4', function(req,res){
+    res.render('game_pad4');
+});
+app.get('/game_pad5', function(req,res){
+    res.render('game_pad5');
+});
+app.get('/game_pad6', function(req,res){
+    res.render('game_pad6');
+});
+app.get('/game_pad7', function(req,res){
+    res.render('game_pad7');
+});
+app.get('/game_pad8', function(req,res){
+    res.render('game_pad8');
+});
+
 
 //sends you to recruiter login from starting page
 app.post('/', function(req,res){
@@ -206,8 +242,538 @@ app.post('/candidate_login', async function(req, res) {
 });
 
 app.post('/return_candidate', function(req,res){
-   res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+  res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+     
 });
+
+app.post('/pad2', function(req,res){
+   res.redirect('/game_pad2'); 
+});
+function randomnum(){
+    let ran = Math.floor(Math.random()*7)+2;
+    if(ran == undefined){
+        randomnum();
+    }
+    // console.log("ran  " + ran);
+    // console.log("arrray  " + array);
+    
+    for(var i = 0; i < array.length; i++){
+        if(array[i] === ran){
+            ran = randomnum();
+            // console.log("ran1  " + ran);
+            // console.log("arrray1  " + array[i]);
+            //return;
+        }
+        
+    }
+    return ran;
+}
+function path(path){
+    if(path==2){
+        return '/game_pad2';
+    }
+    if(path==3){
+        return '/game_pad3';
+    }
+    if(path==4){
+        return '/game_pad4';
+    }
+    if(path==5){
+        return '/game_pad5';
+    }
+    if(path==6){
+        return '/game_pad6';
+    }
+    if(path==7){
+        return '/game_pad7';
+    }
+    if(path==8){
+        return '/game_pad8';
+    }
+    
+}
+var array = [];
+var GPcorrect = 0;
+var GPincorrect = 0;
+var GPcounter = 0;
+var GPlives = 0;
+var endDate;
+app.post('/is_correct', function(req,res){
+    let ran = randomnum();
+    array = [];
+    let route = path(ran);
+    
+    GPcorrect = 0;
+    GPincorrect = 0;
+    GPcounter = 0;
+    
+    let trying = req.body.answer;
+    
+    if(trying == 1255){
+        GPcorrect = GPcorrect + 1;
+        console.log("GPcorrect " + GPcorrect);
+        array.push(ran);
+        console.log(array);
+        GPcounter = GPcounter + 1;
+        if(GPcounter == 5){
+           endDate = new Date();
+           endDate = endDate.toLocaleTimeString();
+           res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+           return;
+        }
+        res.redirect(route);
+    }else{
+        
+        GPlives = GPlives + 1;
+        if(GPlives >= 3){
+            GPincorrect = GPincorrect + 1;
+            console.log("GPincorrect " + GPincorrect);
+            array.push(ran);
+            console.log(array);
+            GPlives = 0;
+            GPcounter = GPcounter + 1;
+            if(GPcounter == 5){
+                endDate = new Date();
+                endDate = endDate.toLocaleTimeString();
+                res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+                return;
+            }
+            res.redirect(route);
+        }else{
+            res.redirect('/into_gamepad')
+        }
+        
+    }
+});
+
+app.post('/is_correct2', async function(req, res) {
+    let ran2 = randomnum();
+    let route2 = path(ran2);
+    let trying2 = req.body.answer;
+    if(trying2 == 6624){
+        GPcorrect = GPcorrect + 1;
+        console.log("GPcorrect " + GPcorrect);
+        array.push(ran2);
+        console.log(array);
+        GPcounter = GPcounter + 1;
+        
+        if(GPcounter == 5){
+            endDate = new Date();
+            endDate = endDate.toLocaleTimeString();
+          var candidateid = req.session.candidateInfo;
+          let attempt = await checkGPDB(candidateid.candidate_id);
+          console.log(attempt);
+          if( attempt == false){
+            var candidateid = req.session.candidateInfo;
+            GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }
+           res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+           return;
+        }
+        res.redirect(route2);
+    }else{
+        
+        GPlives = GPlives + 1;
+        if(GPlives >= 3){
+            GPincorrect = GPincorrect + 1;
+            console.log("GPincorrect " + GPincorrect);
+            array.push(ran2);
+            console.log(array);
+            GPlives = 0;
+            GPcounter = GPcounter + 1;
+            if(GPcounter == 5){
+                endDate = new Date();
+                endDate = endDate.toLocaleTimeString();
+                var candidateid = req.session.candidateInfo;
+                let attempt = await checkGPDB(candidateid.candidate_id);
+                console.log(attempt);
+                if( attempt == false){
+                  var candidateid = req.session.candidateInfo;
+                  GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }
+                res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+                return;
+            }
+            res.redirect(route2);
+        }else{
+            res.redirect('/game_pad2')
+        }
+        
+    }
+});
+app.post('/is_correct3', async function(req, res) {
+    let ran3 = randomnum();
+    let route3 = path(ran3);
+    let trying3 = req.body.answer;
+    if(trying3 == 9909){
+        GPcorrect = GPcorrect + 1;
+        console.log("GPcorrect " + GPcorrect);
+        array.push(ran3);
+        console.log(array);
+        GPcounter = GPcounter + 1;
+        
+        if(GPcounter == 5){
+            endDate = new Date();
+            endDate = endDate.toLocaleTimeString();
+          var candidateid = req.session.candidateInfo;
+          let attempt = await checkGPDB(candidateid.candidate_id);
+          console.log(attempt);
+          if( attempt == false){
+            var candidateid = req.session.candidateInfo;
+            GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }
+           res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+           return;
+        }
+        
+        res.redirect(route3);
+    }else{
+        
+        GPlives = GPlives + 1;
+        if(GPlives >= 3){
+            GPincorrect = GPincorrect + 1;
+            console.log("GPincorrect " + GPincorrect);
+            array.push(ran3);
+            console.log(array);
+            GPlives = 0;
+            GPcounter = GPcounter + 1;
+            if(GPcounter == 5){
+                endDate = new Date();
+                endDate = endDate.toLocaleTimeString();
+                var candidateid = req.session.candidateInfo;
+                let attempt = await checkGPDB(candidateid.candidate_id);
+                console.log(attempt);
+                if( attempt == false){
+                  var candidateid = req.session.candidateInfo;
+                  GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }
+                res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+                return;
+            }
+            res.redirect(route3);
+        }else{
+            res.redirect('/game_pad3')
+        }
+        
+    }
+})
+app.post('/is_correct4', async function(req, res) {
+    let ran4 = randomnum();
+    let route4 = path(ran4);
+    let trying4 = req.body.answer;
+    if(trying4 == 8597){
+        GPcorrect = GPcorrect + 1;
+        console.log("GPcorrect " + GPcorrect);
+        array.push(ran4);
+        console.log(array);
+        GPcounter = GPcounter + 1;
+        
+        if(GPcounter == 5){
+            endDate = new Date();
+            endDate = endDate.toLocaleTimeString();
+          var candidateid = req.session.candidateInfo;
+          let attempt = await checkGPDB(candidateid.candidate_id);
+          console.log(attempt);
+          if( attempt == false){
+            var candidateid = req.session.candidateInfo;
+            GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }
+           res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+           return;
+        }
+        
+        res.redirect(route4);
+    }else{
+        
+        GPlives = GPlives + 1;
+        if(GPlives >= 3){
+            GPincorrect = GPincorrect + 1;
+            console.log("GPincorrect " + GPincorrect);
+            array.push(ran4);
+            console.log(array);
+            GPlives = 0;
+            GPcounter = GPcounter + 1;
+            if(GPcounter == 5){
+                endDate = new Date();
+                endDate = endDate.toLocaleTimeString();
+                var candidateid = req.session.candidateInfo;
+                let attempt = await checkGPDB(candidateid.candidate_id);
+                console.log(attempt);
+                if( attempt == false){
+                  var candidateid = req.session.candidateInfo;
+                  GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }
+                res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+                return;
+            }
+            res.redirect(route4);
+        }else{
+            res.redirect('/game_pad4')
+        }
+        
+    }
+})
+app.post('/is_correct5', async function(req, res) {
+    let ran5 = randomnum();
+    let route5 = path(ran5);
+    let trying5 = req.body.answer;
+    if(trying5 == 7911){
+        GPcorrect = GPcorrect + 1;
+        console.log("GPcorrect " + GPcorrect);
+        array.push(ran5);
+        console.log(array);
+        GPcounter = GPcounter + 1;
+        
+        if(GPcounter == 5){
+            endDate = new Date();
+            endDate = endDate.toLocaleTimeString();
+          var candidateid = req.session.candidateInfo;
+          let attempt = await checkGPDB(candidateid.candidate_id);
+          console.log(attempt);
+          if( attempt == false){
+            var candidateid = req.session.candidateInfo;
+            GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }
+           res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+           return;
+        }
+        
+        res.redirect(route5);
+    }else{
+        
+        GPlives = GPlives + 1;
+        if(GPlives >= 3){
+            GPincorrect = GPincorrect + 1;
+            console.log("GPincorrect " + GPincorrect);
+            array.push(ran5);
+            console.log(array);
+            GPlives = 0;
+            GPcounter = GPcounter + 1;
+            if(GPcounter == 5){
+                endDate = new Date();
+                endDate = endDate.toLocaleTimeString();
+                var candidateid = req.session.candidateInfo;
+                let attempt = await checkGPDB(candidateid.candidate_id);
+                console.log(attempt);
+                if( attempt == false){
+                  var candidateid = req.session.candidateInfo;
+                  GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }
+                res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+                return;
+            }
+            res.redirect(route5);
+        }else{
+            res.redirect('/game_pad5')
+        }
+        
+    }
+})
+app.post('/is_correct6', async function(req, res) {
+    let ran6 = randomnum();
+    let route6 = path(ran6);
+    let trying6 = req.body.answer;
+    if(trying6 == 9632){
+        GPcorrect = GPcorrect + 1;
+        console.log("GPcorrect " + GPcorrect);
+        array.push(ran6);
+        console.log(array);
+        GPcounter = GPcounter + 1;
+        
+        if(GPcounter == 5){
+            endDate = new Date();
+            endDate = endDate.toLocaleTimeString();
+          var candidateid = req.session.candidateInfo;
+          let attempt = await checkGPDB(candidateid.candidate_id);
+          console.log(attempt);
+          if( attempt == false){
+            var candidateid = req.session.candidateInfo;
+            GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }
+           res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+           return;
+        }
+        
+        res.redirect(route6);
+    }else{
+        
+        GPlives = GPlives + 1;
+        if(GPlives >= 3){
+            GPincorrect = GPincorrect + 1;
+            console.log("GPincorrect " + GPincorrect);
+            array.push(ran6);
+            console.log(array);
+            GPlives = 0;
+            GPcounter = GPcounter + 1;
+            if(GPcounter == 5){
+                endDate = new Date();
+                endDate = endDate.toLocaleTimeString();
+                var candidateid = req.session.candidateInfo;
+                let attempt = await checkGPDB(candidateid.candidate_id);
+                console.log(attempt);
+                if( attempt == false){
+                  var candidateid = req.session.candidateInfo;
+                  GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }
+                res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+                return;
+            }
+            res.redirect(route6);
+        }else{
+            res.redirect('/game_pad6')
+        }
+        
+    }
+})
+app.post('/is_correct7', async function(req, res) {
+    let ran7 = randomnum();
+    let route7 = path(ran7);
+    let trying7 = req.body.answer;
+    if(trying7 == 3061){
+        GPcorrect = GPcorrect + 1;
+        console.log("GPcorrect " + GPcorrect);
+        array.push(ran7);
+        console.log(array);
+        GPcounter = GPcounter + 1;
+        
+        if(GPcounter == 5){
+            endDate = new Date();
+            endDate = endDate.toLocaleTimeString();
+          var candidateid = req.session.candidateInfo;
+          let attempt = await checkGPDB(candidateid.candidate_id);
+          console.log(attempt);
+          if( attempt == false){
+            var candidateid = req.session.candidateInfo;
+            GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }
+           res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+           return;
+        }
+        
+        res.redirect(route7);
+    }else{
+        
+        GPlives = GPlives + 1;
+        if(GPlives >= 3){
+            GPincorrect = GPincorrect + 1;
+            console.log("GPincorrect " + GPincorrect);
+            array.push(ran7);
+            console.log(array);
+            GPlives = 0;
+            GPcounter = GPcounter + 1;
+            if(GPcounter == 5){
+                endDate = new Date();
+                endDate = endDate.toLocaleTimeString();
+                var candidateid = req.session.candidateInfo;
+                let attempt = await checkGPDB(candidateid.candidate_id);
+                console.log(attempt);
+                if( attempt == false){
+                  var candidateid = req.session.candidateInfo;
+                  GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }
+                res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+                return;
+            }
+            res.redirect(route7);
+        }else{
+            res.redirect('/game_pad7')
+        }
+        
+    }
+})
+app.post('/is_correct8', async function(req, res) {
+    let ran8 = randomnum();
+    let route8 = path(ran8);
+    let trying8 = req.body.answer;
+    if(trying8 == 5747){
+        GPcorrect = GPcorrect + 1;
+        console.log("GPcorrect " + GPcorrect);
+        array.push(ran8);
+        console.log(array);
+        GPcounter = GPcounter + 1;
+        
+        if(GPcounter == 5){
+            endDate = new Date();
+            endDate = endDate.toLocaleTimeString();
+          var candidateid = req.session.candidateInfo;
+          let attempt = await checkGPDB(candidateid.candidate_id);
+          console.log(attempt);
+          if( attempt == false){
+            var candidateid = req.session.candidateInfo;
+            GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }
+           res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+           return;
+        }
+        
+        res.redirect(route8);
+    }else{
+        
+        GPlives = GPlives + 1;
+        if(GPlives >= 3){
+            GPincorrect = GPincorrect + 1;
+            console.log("GPincorrect " + GPincorrect);
+            array.push(ran8);
+            console.log(array);
+            GPlives = 0;
+            GPcounter = GPcounter + 1;
+            if(GPcounter == 5){
+                endDate = new Date();
+                endDate = endDate.toLocaleTimeString();
+                var candidateid = req.session.candidateInfo;
+                let attempt = await checkGPDB(candidateid.candidate_id);
+                console.log(attempt);
+                if( attempt == false){
+                  var candidateid = req.session.candidateInfo;
+                  GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }
+                res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
+                return;
+            }
+            res.redirect(route8);
+        }else{
+            res.redirect('/game_pad8')
+        }
+        
+    }
+})
+
+
+function checkGPDB(id){
+    
+    var query = 'SELECT * FROM game_pad WHERE game_pad_user=?';
+   
+    return new Promise(function(resolve, reject){
+        connection.query(query, [id], function(error, result) {
+          if(error) throw error;
+          if(result === undefined || result.length == 0){
+              resolve(false);
+          }else {
+            resolve(true);
+          }
+        });
+    });
+    
+    
+}
+
+function GPinsert(id, correct, wrong, start, end, counter){
+    
+    
+    
+    //if not found here i insert into table :)  
+        let stmt2 = 'INSERT INTO game_pad (game_pad_user,game_pad_correct,game_pad_wrong,game_pad_start_time,game_pad_end_time,game_pad_completed) VALUES (?,?,?,?,?,?)';
+
+        let data2 = [id, correct, wrong, start, end, counter];
+        return new Promise(function(resolve, reject){
+            connection.query(stmt2, data2, function(error, result) {
+                if(error) throw error;
+                console.log("inserted?")
+                resolve(result);
+            });
+        });
+    
+}
 
 app.get('/log_out', check_authenticated ,function(req, res) {
     req.session.destroy();
@@ -245,14 +811,37 @@ app.post('/inputBotSays', function(req, res) {
                 'ON DUPLICATE KEY UPDATE bot_says_points=VALUES(bot_says_points), bot_says_start_time=VALUES(bot_says_start_time), bot_says_end_time=VALUES(bot_says_end_time);'
 
     var data2 = [req.session.candidateInfo.candidate_id, Number(req.body.points), req.body.time1, req.body.time2, true, Number(req.body.points), req.body.time1, req.body.time2, req.body.time2]
-
+    // pretty sure the last 4 values in data2 are useless
     connection.query(stmt2, data2, function(error, result) {
         if (error) throw error;
         else {
             console.log("success!")
             res.redirect('/candidate_loggedin')
         }
+    });
+});
+
+app.get('/where_my_error', check_authenticated, function(req, res) {
+    res.render('where_my_error');
+});
+
+app.post('/inputWhereMyError', function(req, res) {
+    console.log("yo, it made it", req.body);
+    console.log("yo, this is the candidate's stuff", req.session.candidateInfo);
+    
+    var stmt2 = 'INSERT INTO where_my_error (where_my_error_user, where_my_error_correct, where_my_error_wrong , where_my_error_start_time, where_my_error_end_time, where_my_error_completed) VALUES(?,?,?,?,?,?) ' +
+                'ON DUPLICATE KEY UPDATE where_my_error_correct=VALUES(where_my_error_correct), where_my_error_wrong=VALUES(where_my_error_wrong), where_my_error_start_time=VALUES(where_my_error_start_time), where_my_error_end_time=VALUES(where_my_error_end_time);'
+    
+    var data2 = [req.session.candidateInfo.candidate_id, Number(req.body.correct), Number(req.body.wrong), req.body.time1, req.body.time2, true]
+
+    connection.query(stmt2, data2, function(error, result) {
+        if (error) throw error;
+        else{
+            console.log("success!");
+            res.redirect('/candidate_loggedin');
+        }
     })
+
 });
 
 

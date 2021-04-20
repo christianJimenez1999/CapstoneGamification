@@ -14,29 +14,29 @@
     <body>
         
         <div>
-            <h1>GamePad section</h1>
+            <h1>Candidate logged in</h1>
+            <label class='font-italic font-weight-light' >GamePad section</label>
         </div>
         
         <div class='container'>
             <div class='jumbotron'>
                 <div align='center'>
                      
-                    <strong>
-                        <p>Welcome to our fundemantal games answer to the best of your capabilities!</p>
+                    <strong>  
                         <p class="font-italic" > Three lives per quesiton. Lose all three and question marked wrong. Good luck!</p>
                     </strong>
                     
                     <figure>
-                        <img src="img/pointers1.png" alt="pointers1" class="col-sm-4 portrait" height="200" >
+                        <img src="img/dataEncap2.png" alt="pointers1" class="col-sm-4 portrait">
                     </figure>
                     
-                    <p>What would be the output from line 9?</p>
-                    <p><strong>7894</strong>) 300, 600, memory address, 100</p>
-                    <p><strong>1255</strong>) 100, memory address, memory address, 100</p>
-                    <p><strong>8050</strong>) 100, memory address, 800, 800</p>
-                    <p><strong>9191</strong>) 100, 153161, 1681531, 100</p>
+                    <p>What is needed to add data encapsulation to this code snippet?</p>
+                    <p><strong>5747</strong>) private/public members to class example().</p>
+                    <p><strong>8714</strong>) remove example1 and ex2.</p>
+                    <p><strong>3081</strong>) more variables in class example().</p>
+                    <p><strong>1553</strong>) remove int main().</p>
                     
-                    <form action='/is_correct' method='POST'>
+                    <form action='/is_correct8' method='POST'>
                         <input id='answer' name='answer' placeholder'insert answer here' required>
                         
                         </br>
@@ -65,12 +65,12 @@
                         </div>
                         
                         </br>
-                        <button class='btn btn-primary btn-lg'>Enter</button>
                         
+                        
+                        <button class='btn btn-primary btn-lg'>Enter</button>
                     </form>
                     
                     <script>
-                    
                         function inputNum(num){
                             var text = document.getElementById("answer");
                             var numb = num.innerHTML;
@@ -134,17 +134,9 @@
                     </script>
                     <form action='/return_candidate' method='POST'>
                         <div class='col-sm-2'>
-                        <button class='btn btn-primary btn-sm btn-block'>Return to Menu</button>
+                        <button class='btn btn-primary btn-sm btn-block' id='menu'>Return to Menu</button>
                         </div>
                     </form>
-                    
-                    <!--sends to the second webpage in the game pad-->
-                    <form action='/pad2' method='POST'>
-                        <div class='col-sm-1'>
-                            <button style="visibility:hidden;" id='menu'></button>
-                        </div>
-                    </form>
-                    
                 </div>
                 
             </div>

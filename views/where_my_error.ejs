@@ -1,0 +1,60 @@
+<!DOCTYPE>
+
+<html>
+    <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+        <title>Where's My Error</title>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+	        <link rel='stylesheet' type='text/css' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+	        <link rel='stylesheet' type='text/css' href='app.css'>
+    </head>
+    
+    <body style="background: linear-gradient(50deg, rgba(34,193,195,1) 0%, rgba(145,219,42,1) 50%, rgba(253,249,45,1) 100%); ">
+        <div class='container' style="background:rgba(255,255,255,.6); margin-top:3px;">
+            <h1>Where's my error!</h1>
+        </div>
+        
+        
+        <div class="container">
+            <div class="row" id="statuses" style="background:rgba(255,255,255,.6); margin: 5px;">
+                <div class="col-sm"> <div id="leftExplode"></div></div>
+                <div class="col-sm"> <div>Lives!</div> <h5 id="lives" style="background: linear-gradient(50deg, rgba(34,193,195,1) 0%, rgba(42,50,219,1) 50%, rgba(186,45,253,1) 100%);">4</h5></div>
+                <div class="col-sm"> <div>Correct!</div> <h5 id="correct">0</h5></div>
+                <div class="col-sm"> <div>Questions</div> <h5 id="gotten">0</h5></div>
+                <div class="col-sm"> <div id="rightExplode"></div></div>
+                <!--<div class="col-sm" id="type">Logical</div>-->
+            </div>
+        </div>
+        
+        <div class="container" id="finisher"></div>
+        
+        <div class='container' id="where_my_error_game">
+            
+            <div class='row' id='single'>
+                
+                <div class='col-sm' >
+                    <div class='row' style="background:rgba(255,255,255,.6); margin: 5px; padding:5px;"><p>Hi, welcome to Where my error. This is a game trying to figure out whether or not you 
+                    can use the terminal output to figure out what line caused the output! A timer is displayed below and 
+                    a demo is to the right. <br>When you click a line it is the line that will be checked when the timer runs 
+                    out. If you are sure of your answer than double click it to check immediately!<br>
+                    Don't worry this game is more for fun! 
+                    So keep trying, no penalty from just trying.</p>
+                    <button class="btn btn-info" onClick='controller()'>Ready?</button>
+                    </div> <!--GOTTA MAKE THIS ONE LINE-->
+                    
+                    <div class='row' style="background:rgba(255,255,255,.6); margin: 5px;">TIMER HERE</div>
+                </div>
+                
+                <div class='col-md' style="background:rgba(255,255,255,.6); margin: 5px; padding:5px;">
+                    <img src='https://i.imgur.com/rY3VU4d.gif' style='width:100%;'>
+                </div> <!--GOTTA MAKE THIS OTHER LINE-->
+
+            </div> 
+            
+        </div> <!--THIS CLOSES THE where_my_error_game-->
+        
+        <script src='jswork/where_my_error.js'></script>
+    </body>
+    
+</html>
