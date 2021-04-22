@@ -37,7 +37,7 @@
                     <p><strong>5382</strong>) classes are not available in C++.</p>
                     
                     <form action='/is_correct5' method='POST'>
-                        <input id='answer' name='answer' placeholder'insert answer here' required>
+                        <input id='answer' name='answer' value='insert here' required>
                         
                         </br>
                         </br>
@@ -67,7 +67,7 @@
                         </br>
                         
                         
-                        <button class='btn btn-primary btn-lg'>Enter</button>
+                        <button id="enter" class='btn btn-primary btn-lg'>Enter</button>
                     </form>
                     
                     <script>
@@ -124,7 +124,7 @@
                                 }
                                 
                                 if(time.total == 0){
-                                    document.getElementById("menu").click();
+                                    document.getElementById("enter").click();
                                 }
                             }
                             update();
@@ -132,11 +132,7 @@
                         }
                         running('clockTimer', end);
                     </script>
-                    <form action='/return_candidate' method='POST'>
-                        <div class='col-sm-2'>
-                        <button class='btn btn-primary btn-sm btn-block' id='menu'>Return to Menu</button>
-                        </div>
-                    </form>
+                    
                 </div>
                 
             </div>
