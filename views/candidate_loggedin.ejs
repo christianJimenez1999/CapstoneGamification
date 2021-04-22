@@ -13,28 +13,22 @@
 
     <body>
         
-        <div>
+        <div id="headerSection">
             <h1>Candidate logged in</h1>
             <h3>Hello candidate: <%= candidate.candidate_id%></h3>
-            <form action='/into_categories' method='POST'>
-                <button class="btn btn-link">Categories</button>
-            </form>
-            <form action='/into_gamepad' method='POST'>
-                <button class="btn btn-link">Game Pad</button>
-            </form>
         </div>
-        
-        <form action='/into_gamepad' method='POST'>
-            <div class='col-sm-12'>
-                <button class="btn btn-link">Game Pad</button>
-            </div>
-            
-        </form>
-
-        <a href="/bot_says"><button>Bot_says</button></a>
-        <a href="/where_my_error"><button>Where_my_error</button></a>
-        
-        <a href="/log_out"><button>Log out</button></a>
+        <div id="buttonSelection">
+            <a href="/into_categories"><button>Categories</button></a>
+            <br>
+            <a href="/into_gamepad"><button>Game Pad</button></a>
+            <br>
+            <a href="/bot_says"><button>Bot_says</button></a>
+            <br>
+            <a href="/where_my_error"><button>Where_my_error</button></a>
+            <br>
+            <a href="/log_out"><button>Log out</button></a>
+            <br>
+        </div>
         
         <script src="jswork/create.js"></script>
 
