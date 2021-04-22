@@ -897,7 +897,7 @@ app.post('/inputBotSays', function(req, res) {
     });
 });
 
-app.get('/where_my_error', check_authenticated, function(req, res) {
+app.get('/where_my_error', function(req, res) {
     res.render('where_my_error');
 });
 
