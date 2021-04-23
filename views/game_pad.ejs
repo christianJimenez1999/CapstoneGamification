@@ -37,7 +37,7 @@
                     <p><strong>9191</strong>) 100, 153161, 1681531, 100</p>
                     
                     <form action='/is_correct' method='POST'>
-                        <input id='answer' name='answer' placeholder'insert answer here' required>
+                        <input id='answer' name='answer' value='insert here' required>
                         
                         </br>
                         </br>
@@ -65,7 +65,7 @@
                         </div>
                         
                         </br>
-                        <button class='btn btn-primary btn-lg'>Enter</button>
+                        <button id='enter' class='btn btn-primary btn-lg'>Enter</button>
                         
                     </form>
                     
@@ -124,7 +124,7 @@
                                 }
                                 
                                 if(time.total == 0){
-                                    document.getElementById("menu").click();
+                                    document.getElementById("enter").click();
                                 }
                             }
                             update();
@@ -132,19 +132,7 @@
                         }
                         running('clockTimer', end);
                     </script>
-                    <form action='/return_candidate' method='POST'>
-                        <div class='col-sm-2'>
-                        <button class='btn btn-primary btn-sm btn-block'>Return to Menu</button>
-                        </div>
-                    </form>
-                    
-                    <!--sends to the second webpage in the game pad-->
-                    <form action='/pad2' method='POST'>
-                        <div class='col-sm-1'>
-                            <button style="visibility:hidden;" id='menu'></button>
-                        </div>
-                    </form>
-                    
+        
                 </div>
                 
             </div>

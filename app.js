@@ -366,6 +366,9 @@ app.post('/is_correct2', async function(req, res) {
           if( attempt == false){
             var candidateid = req.session.candidateInfo;
             GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }else if(attempt == true){
+            var candidateid = req.session.candidateInfo;
+            GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
           }
            res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
            return;
@@ -390,6 +393,9 @@ app.post('/is_correct2', async function(req, res) {
                 if( attempt == false){
                   var candidateid = req.session.candidateInfo;
                   GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }else if(attempt == true){
+                  var candidateid = req.session.candidateInfo;
+                  GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
                 }
                 res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
                 return;
@@ -421,6 +427,9 @@ app.post('/is_correct3', async function(req, res) {
           if( attempt == false){
             var candidateid = req.session.candidateInfo;
             GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }else if(attempt == true){
+            var candidateid = req.session.candidateInfo;
+            GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
           }
            res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
            return;
@@ -446,6 +455,9 @@ app.post('/is_correct3', async function(req, res) {
                 if( attempt == false){
                   var candidateid = req.session.candidateInfo;
                   GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }else if(attempt == true){
+                  var candidateid = req.session.candidateInfo;
+                  GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
                 }
                 res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
                 return;
@@ -477,6 +489,9 @@ app.post('/is_correct4', async function(req, res) {
           if( attempt == false){
             var candidateid = req.session.candidateInfo;
             GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }else if(attempt == true){
+            var candidateid = req.session.candidateInfo;
+            GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
           }
            res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
            return;
@@ -502,6 +517,9 @@ app.post('/is_correct4', async function(req, res) {
                 if( attempt == false){
                   var candidateid = req.session.candidateInfo;
                   GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }else if(attempt == true){
+                  var candidateid = req.session.candidateInfo;
+                  GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
                 }
                 res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
                 return;
@@ -533,6 +551,9 @@ app.post('/is_correct5', async function(req, res) {
           if( attempt == false){
             var candidateid = req.session.candidateInfo;
             GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }else if(attempt == true){
+            var candidateid = req.session.candidateInfo;
+            GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
           }
            res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
            return;
@@ -558,6 +579,9 @@ app.post('/is_correct5', async function(req, res) {
                 if( attempt == false){
                   var candidateid = req.session.candidateInfo;
                   GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }else if(attempt == true){
+                  var candidateid = req.session.candidateInfo;
+                  GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
                 }
                 res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
                 return;
@@ -589,6 +613,9 @@ app.post('/is_correct6', async function(req, res) {
           if( attempt == false){
             var candidateid = req.session.candidateInfo;
             GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }else if(attempt == true){
+            var candidateid = req.session.candidateInfo;
+            GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
           }
            res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
            return;
@@ -614,6 +641,9 @@ app.post('/is_correct6', async function(req, res) {
                 if( attempt == false){
                   var candidateid = req.session.candidateInfo;
                   GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }else if(attempt == true){
+                  var candidateid = req.session.candidateInfo;
+                  GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
                 }
                 res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
                 return;
@@ -645,6 +675,9 @@ app.post('/is_correct7', async function(req, res) {
           if( attempt == false){
             var candidateid = req.session.candidateInfo;
             GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }else if(attempt == true){
+            var candidateid = req.session.candidateInfo;
+            GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
           }
            res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
            return;
@@ -670,6 +703,9 @@ app.post('/is_correct7', async function(req, res) {
                 if( attempt == false){
                   var candidateid = req.session.candidateInfo;
                   GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }else if(attempt == true){
+                  var candidateid = req.session.candidateInfo;
+                  GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
                 }
                 res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
                 return;
@@ -701,6 +737,9 @@ app.post('/is_correct8', async function(req, res) {
           if( attempt == false){
             var candidateid = req.session.candidateInfo;
             GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+          }else if(attempt == true){
+            var candidateid = req.session.candidateInfo;
+            GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
           }
            res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
            return;
@@ -726,6 +765,9 @@ app.post('/is_correct8', async function(req, res) {
                 if( attempt == false){
                   var candidateid = req.session.candidateInfo;
                   GPinsert(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter); 
+                }else if(attempt == true){
+                  var candidateid = req.session.candidateInfo;
+                  GPUpdate(candidateid.candidate_id, GPcorrect, GPincorrect, fulldate, endDate, GPcounter);
                 }
                 res.render('candidate_loggedin', {candidate: req.session.candidateInfo}); 
                 return;
@@ -772,6 +814,40 @@ function GPinsert(id, correct, wrong, start, end, counter){
                 resolve(result);
             });
         });
+    
+}
+
+function GPUpdate(id, correct, wrong, start, end, counter){
+    let stmt3 = 'UPDATE game_pad SET ' +
+                'game_pad_user = "' +
+                id +
+                '",'+
+                'game_pad_correct = "'+
+                correct +
+                '",'+
+                'game_pad_wrong = "'+
+                wrong +
+                '",'+
+                'game_pad_start_time = "'+
+                start +
+                '",'+
+                'game_pad_end_time = "'+
+                end +
+                '",'+
+                'game_pad_completed = "'+
+                counter +
+                '"' +
+                'WHERE game_pad_user = '+
+                id +
+                ';';
+    
+    return new Promise(function(resolve,reject){
+        connection.query(stmt3, function(error, result) {
+            if(error) throw error;
+            console.log("updated?");
+            resolve(result);
+        });
+    });
     
 }
 
