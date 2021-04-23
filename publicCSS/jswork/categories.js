@@ -2,6 +2,7 @@ var attempts = 4;
 var currentQuestion = 0;
 var currentLevel = 1;
 var streak = 0;
+var internalBotCount = 0;
 var difficulty = "intro";
 
 function createQuestion(stuff) {
@@ -32,6 +33,7 @@ function appendHuman(middle_material) {
 function checkInputs() { // we know what to check based on the internalHumanCount
     $(document).ready(function() {
         //currentQuestion += 1;
+        internalBotCount += 1;
         if($("#categories_game").find("#inputCorrect").val() == questions[difficulty][currentQuestion]['correct']){
             console.log("This worked!");
             currentLevel += 1;
@@ -80,7 +82,7 @@ function getStarted() {
         if(currentQuestion > 3){
             currentQuestion = 1;
         }
-        var tempQuestion = currentQuestion;
+        var tempQuestion = internalBotCount;
         console.log(tempQuestion)
         
         if(currentLevel >= level_distribution[difficulty]) { // update difficulty
@@ -114,7 +116,7 @@ function getStarted() {
             setTimeout(
               function() 
               {
-                  if(tempQuestion == currentQuestion){
+                  if(tempQuestion == internalBotCount){
                       checkInputs();
                   }
                   else{
