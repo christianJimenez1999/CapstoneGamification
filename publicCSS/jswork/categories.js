@@ -4,6 +4,10 @@ var currentLevel = 1;
 var streak = 0;
 var internalBotCount = 0;
 var difficulty = "intro";
+var startTime = new Date();
+var EndTime;
+var correctAnswers = 0;
+var wrongAnswers = 0;
 
 function createQuestion(stuff) {
     $(document).ready(function() {
@@ -37,8 +41,10 @@ function checkInputs() { // we know what to check based on the internalHumanCoun
         if($("#categories_game").find("#inputCorrect").val() == questions[difficulty][currentQuestion]['correct']){
             console.log("This worked!");
             currentLevel += 1;
+            correctAnswers += 1;
         } else {
             console.log("You failed");
+            wrongAnswers += 1;
             attempts -= 1;
         }
         $("#parentCorrect").remove();
@@ -140,14 +146,14 @@ var questions = {
         correct: "B",
     },
     2:{
-        question: "What is a class?",
+        question: "What is a C++ class?",
         choices:{
             1: "A user defined data type",
             2: "A variable type",
-            3: "Something1",
-            4: "Something2",
+            3: "User defined set of data types",
+            4: "A place where students learn",
         },
-        correct: "A",
+        correct: "C",
     },
     3:{
         question: "What goes inside the parenthesis of a typical for loop?",
@@ -159,24 +165,44 @@ var questions = {
         },
         correct: "D", 
     },
+    4:{
+        question: "What's the difference between C and C++?",
+        choices:{
+            1: "C++ is more fun",
+            2: "C is a lot simpler that C++",
+            3: "C++ can use references, but C can't",
+            4: "Both C and C++ use cin for entering inputs",
+        },
+        correct: "C", 
+    },
+    5:{
+        question: "What does it mean if something is static?",
+        choices:{
+            1: "A varible that can't be changed",
+            2: "A class can't be instantiated",
+            3: "An instance cannot be created from the variable",
+            4: "Something that's carried over in functions",
+        },
+        correct: "D", 
+    },
     
 }, mid:{
     1:{
-        question: "2What data type is used for single digit numbers?",
+        question: "What is the default constructor?",
         choices:{
-            1: "char",
-            2: "int",
-            3: "string",
-            4: "double",
+            1: "Someone that builds houses",
+            2: "A constructor function provided by the programmer",
+            3: "A contructor with no specified parameters",
+            4: "A function that creates functions",
         },
-        correct: "B",
+        correct: "C",
     },
     2:{
-        question: "2What is a class?",
+        question: "What does a Destructor do?",
         choices:{
-            1: "A user defined data type",
-            2: "A variable type",
-            3: "Something1",
+            1: "A member function that deletes an object",
+            2: "THE STAY PUFT MARSHMALLOW MAN",
+            3: "",
             4: "Something2",
         },
         correct: "A",
