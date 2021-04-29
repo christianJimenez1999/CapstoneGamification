@@ -45,6 +45,9 @@ function checkInputs() { // we know what to check based on the internalHumanCoun
             console.log("You failed");
             wrongAnswers += 1;
             attempts -= 1;
+            
+            $("#attemptsLeft").hide().html("<h5>" + attempts + "</h5>").fadeIn('slow');
+            
         }
         $("#parentCorrect").remove();
         $("#inputsButton").remove();
