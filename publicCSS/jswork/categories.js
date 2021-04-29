@@ -198,17 +198,79 @@ var questions = {
         correct: "C",
     },
     2:{
-        question: "What does a Destructor do?",
+        question: "What is a destructor?",
         choices:{
             1: "A member function that deletes an object",
             2: "THE STAY PUFT MARSHMALLOW MAN",
-            3: "",
-            4: "Something2",
+            3: "A variable type that deletes objects",
+            4: "A kind of class that creates varibles",
         },
         correct: "A",
     },
     3:{
-        question: "2What goes inside the parenthesis of a typical for loop?",
+        question: "What's the difference between a struct and class?",
+        choices:{
+            1: "A declared varible",
+            2: "Struct is used in C and C++ is used ",
+            3: "Struct involve public members, and classes involve private members",
+            4: "None of the above",
+        },
+        correct: "B", 
+    },
+    4:{
+        question: "By default, the members of a structure are __________",
+        choices:{
+            1: "Public",
+            2: "Private",
+            3: "Protected",
+            4: "None of the above",
+        },
+        correct: "A", 
+    },
+    5:{
+        question: "Can a destructor be overloaded?",
+        choices:{
+            1: "Yes",
+            2: "No",
+            3: "Maybe",
+            4: "I don't know",
+        },
+        correct: "B", 
+    },
+    
+}, hard:{
+    1:{
+        question: "What is an abstract class?",
+        choices:{
+            1: "A unique class",
+            2: "A class that can't be changed",
+            3: "A class that has at least 1 pure virtual function",
+            4: "A class that can olny be made with an abstract function",
+        },
+        correct: "C",
+    },
+    2:{
+        question: "What is a token?",
+        choices:{
+            1: "A form of currency",
+            2: "Keywords used for variables",
+            3: "A variable needed to access certain functions",
+            4: "Another name for a class",
+        },
+        correct: "B",
+    },
+    3:{
+        question: "When should you use virtual inheratance?",
+        choices:{
+            1: "When it's appropriate",
+            2: "To make a copy of two classes",
+            3: "When there's an error in a class",
+            4: "To distinguish between classes",
+        },
+        correct: "D", 
+    },
+    4:{
+        question: "3What goes inside the parenthesis of a typical for loop?",
         choices:{
             1: "A declared varible",
             2: "A condition",
@@ -217,28 +279,7 @@ var questions = {
         },
         correct: "D", 
     },
-}, hard:{
-    1:{
-        question: "3What data type is used for single digit numbers?",
-        choices:{
-            1: "char",
-            2: "int",
-            3: "string",
-            4: "double",
-        },
-        correct: "B",
-    },
-    2:{
-        question: "3What is a class?",
-        choices:{
-            1: "A user defined data type",
-            2: "A variable type",
-            3: "Something1",
-            4: "Something2",
-        },
-        correct: "A",
-    },
-    3:{
+    5:{
         question: "3What goes inside the parenthesis of a typical for loop?",
         choices:{
             1: "A declared varible",
@@ -253,5 +294,6 @@ var questions = {
 
 var level_distribution = { // basically to see how many points before a level up
     intro: 3, // I just made them up
-    mid: 5 
+    mid: 6
+    hard: 9
 }
