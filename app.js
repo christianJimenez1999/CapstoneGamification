@@ -29,7 +29,7 @@ connection.connect();
 
 // check if user is authenticated
 function check_authenticated(req, res, next) {
-    console.log(req.session.authenticated);
+    // console.log(req.session);
     if(!req.session.authenticated) res.redirect('/');
     else next();
 }
@@ -230,8 +230,8 @@ app.post('/candidate_login', async function(req, res) {
     console.log(attempt);
     
     if(attempt) {
-        //req.session.authenticated = true;
-        req.session.loggedin = true;
+        req.session.authenticated = true;
+        // req.session.loggedin = true;
         req.session.candidateInfo = attempt;
         res.render('candidate_loggedin', {candidate: req.session.candidateInfo})
         //res.redirect('/recruiter_loggedin');
@@ -874,7 +874,7 @@ app.get('/get_candidate/:id', function(req, res) {
 });
 
 
-app.get('/bot_says', /*check_authenticated , */function(req, res) {
+app.get('/bot_says', check_authenticated ,function(req, res) {
     console.log(req.session.loggedin);
     res.render('bot_says');
 });

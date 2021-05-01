@@ -16,6 +16,30 @@ var totalPoints = 0
 var time1 = new Date();
 var time2;
 
+function audioGood() {
+    $(document).ready(function() {
+        var obj = document.createElement("audio");
+        obj.src = "https://www.soundjay.com/door/doorbell-5.mp3"; // this is good.
+        obj.play();
+    })
+}
+
+function audioOkay() {
+    $(document).ready(function() {
+        var obj = document.createElement("audio");
+        obj.src = "https://www.soundjay.com/misc/small-bell-ring-01a.mp3"; // this is okay
+        obj.play();
+    })
+}
+
+function audioBad() {
+    $(document).ready(function() {
+        var obj = document.createElement("audio");
+        obj.src = "https://www.soundjay.com/button/button-16.mp3"; // this is bad
+        obj.play();
+    })
+}
+
 function appendBot(middle_material) {
     $(document).ready(function() {
         
@@ -84,19 +108,22 @@ function checkInputs() { // we know what to check based on the internalHumanCoun
             // botParent.append("<img id='explosion' src='https://bestanimations.com/media/fireworks2/1589967346ba-pretty-delicate-firework-animated-gif-image.gif#.YGa71ze3z8A.link' style='height:200px;width:250px;'>")
             $("#feedbackL").hide().html("<img id='explosion' src='https://bestanimations.com/media/fireworks2/1589967346ba-pretty-delicate-firework-animated-gif-image.gif#.YGa71ze3z8A.link' style='height:100px;width:150px;'>").show().fadeOut(3000)
             $("#feedbackR").hide().html("<img id='explosion' src='https://bestanimations.com/media/fireworks2/1589967346ba-pretty-delicate-firework-animated-gif-image.gif#.YGa71ze3z8A.link' style='height:100px;width:150px;'>").show().fadeOut(3000)
-            
+            audioGood()
         }
         else if(num_right / questions[difficulty][nextQuestionNum]['human']['input_count'] >= 0.55){
             levelUp += 1;
             console.log("two thirds boi");
+            audioOkay()
         }
         else if(num_right / questions[difficulty][nextQuestionNum]['human']['input_count'] <= 0.30){
             lives -= 1;
             $("#lives").html("<h3 style="+life_colors[lives]+"; height: 100%>" + lives + "</h3>")
             console.log("BIG OOF, lives at", lives);
+            audioBad()
         }
         else{ // what to here? subtract a life? if they get stuck then oof
             console.log("ok oof");
+            audioOkay()
         }
         
         // var animation = botParent.find('#explosion').fadeOut(3500)

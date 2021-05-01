@@ -17,6 +17,30 @@ var answer = 0
 
 var canClick = true
 
+function audioGood() {
+    $(document).ready(function() {
+        var obj = document.createElement("audio");
+        obj.src = "https://www.soundjay.com/door/doorbell-5.mp3"; // this is good.
+        obj.play();
+    })
+}
+
+function audioOkay() {
+    $(document).ready(function() {
+        var obj = document.createElement("audio");
+        obj.src = "https://www.soundjay.com/misc/small-bell-ring-01a.mp3"; // this is okay
+        obj.play();
+    })
+}
+
+function audioBad() {
+    $(document).ready(function() {
+        var obj = document.createElement("audio");
+        obj.src = "https://www.soundjay.com/button/button-16.mp3"; // this is bad
+        obj.play();
+    })
+}
+
 function controller() { // check difficulty and the 
     $(document).ready(function() {
         console.log("COURAGE THE COWARDLY DOG SAYS: YAY!")
@@ -146,11 +170,19 @@ function checkAnswer() { // implement the actual checking stuff
         $("#leftExplode").show().html("<img style='width:50px; height:50px;' src='https://bestanimations.com/media/fireworks2/505664765fireworks-animated-gif-10-2.gif'></img>").fadeOut(1000)
         $("#rightExplode").show().html("<img style='width:50px; height:50px;' src='https://bestanimations.com/media/fireworks2/505664765fireworks-animated-gif-10-2.gif'></img>").fadeOut(1000)
         
+        audioGood();
     }
     else{
         console.log("KATS SAYS: failure doggy")
         lives -= 1;
         $("#lives").hide().html("<h5 style='background:"+background[lives]+"'>"+lives+"</h5>").fadeIn('slow')
+        
+        if(Math.abs(answer - questions[difficulty][currentQuestion]["correct"]) == 1) {
+            audioOkay();
+        }
+        else{
+            audioBad();
+        }
         
     }
     gotten += 1
