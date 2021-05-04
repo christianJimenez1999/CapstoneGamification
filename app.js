@@ -51,9 +51,28 @@ app.get('/candidate_login', function(req,res){
     res.render('candidate_login');
 });
 
-app.get('/into_categories', function(req,res){
+app.get('/into_categories', check_authenticated, function(req,res){
     res.render('categories');
 })
+
+app.post('/inputCategories', function(req, res) {
+    console.log("You're done!", req.body);
+    console.log("Here's your candidate stuff", req.session.candidateInfo);
+    
+    var stmt2 = 'INSERT INTO categories (categories_user, categories_correct, categories_wrong, categories_start_time, categories_end_time, categories_completed) VALUES(?,?,?,?,?,?) ' +
+                'ON DUPLICATE KEY UPDATE categories_correct=VALUES(categories_correct), categories_wrong=VALUES(categories_wrong), categories_start_time=VALUES(categories_start_time), categories_end_time=VALUES(categories_end_time);'
+    
+    var data2 = [req.session.candidateInfo.candidate_id, Number(req.body.correct), Number(req.body.wrong), req.body.startTime, req.body.endTime, true]
+
+    connection.query(stmt2, data2, function(error, result) {
+        if (error) throw error;
+        else{
+            console.log("success!");
+            res.redirect('/candidate_loggedin');
+        }
+    })
+
+});
 
 app.post('/into_categories', function(req,res){
     res.redirect('/into_categories');

@@ -11,20 +11,25 @@
         </head>
     </head>
 
-    <body>
-        
-        <div>
-            <h1>Candidate logged in</h1>
-        </div>
+    <body style="background-image: linear-gradient(#bad072, #d5e2ed);">
         
         <div align='center'>
             <h1>Categories Section</h1>
             <h4>This is how the basic layout of the questions will be:</h4>
         </div>
         
-        <div class='container' id="categories_game">
-            <div class='jumbotron'>
-                <div align='center'>
+        
+        <div class="container">
+            <div class="row" id="results" margin="5px;" style="background-color:rgb(213, 226, 237)">
+                <div class="col-sm"> <div>Attempts: </div> <h5 id="attemptsLeft">4</h5> </div>
+                <div class="col-sm"> <div>Correct Questions: </div> <h5 id="correctAnswersShow">0</h5></div>
+            </div>
+        </div>
+        
+        
+        <div class='container' id="categories_game" style="background-color:rgb(213, 226, 237)">
+            <div class='jumbotron' style="background-color:rgb(213, 226, 237)">
+                <div align='center'  style="background-color:rgb(213, 226, 237)">
                      
                     <strong>
                         <p>*Question Name*</p>    
@@ -59,7 +64,7 @@
         </div>
         
         <div align='center'>
-            <h4>You will have 1 minute for each question.  The questions will be C++ related that scale in difficulty.  Make sense?</h4>
+            <h4>You will have 30 seconds for each question.  The questions will be C++ related that scale in difficulty.  Make sense?</h4>
             <button class='btn btn-success' id='inputsButton' onClick='getStarted()'>Start</button>
         </div>
 
