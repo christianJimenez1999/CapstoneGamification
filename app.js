@@ -51,7 +51,7 @@ app.get('/candidate_login', function(req,res){
     res.render('candidate_login');
 });
 
-app.get('/into_categories', function(req,res){
+app.get('/into_categories', check_authenticated, function(req,res){
     res.render('categories');
 })
 
