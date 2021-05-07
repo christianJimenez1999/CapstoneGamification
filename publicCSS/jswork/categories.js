@@ -41,13 +41,15 @@ function checkInputs() { // we know what to check based on the internalHumanCoun
             console.log("This worked!");
             currentLevel += 1;
             correctAnswers += 1;
+            $("#correctAnswersShow").hide().html("<h5>" + correctAnswers + "</h5>").fadeIn('slow');
+
         } else {
             console.log("You failed");
             wrongAnswers += 1;
             attempts -= 1;
             
             $("#attemptsLeft").hide().html("<h5>" + attempts + "</h5>").fadeIn('slow');
-            $("#correctAnswersShow").hide().html("<h5>" + correctAnswers + "</h5>").fadeIn('slow');
+            // $("#correctAnswersShow").hide().html("<h5>" + correctAnswers + "</h5>").fadeIn('slow');
             
         }
         $("#parentCorrect").remove();
