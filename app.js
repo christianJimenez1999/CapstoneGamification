@@ -939,6 +939,10 @@ app.post('/inputWhereMyError', function(req, res) {
 
 });
 
+app.get('/fast_or_faster',check_authenticated, function(req, res) {
+    res.render('fast_or_faster');
+});
+
 
 // the port listen
 app.listen(process.env.PORT, process.env.IP, function(){
