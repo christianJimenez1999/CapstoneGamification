@@ -39,31 +39,31 @@ function seeCandidate() {
                         try {
                             // $('#search_results').prepend("<div><h3>Here is candidate's " + results['data']['candidate_id'] + " current status <h3><h1>");
                             
-                            let categories =  "<h5>Categories</h5><table> <tr> <th>Completed</th> <th>Correct</th> <th>Wrong</th> <th>start_time</th> <th>end_time</th> </tr>"+
+                            let categories =  "<h5>Categories</h5><table> <tr> <th class='stretch'>Completed</th> <th class='stretch'>Correct</th> <th class='stretch'>Wrong</th> <th class='stretch'>start_time</th> <th class='stretch'>end_time</th> </tr>"+
                             "<td> " + results['data']['categories_completed'] + " </td><td> " + results['data']['categories_correct'] + " </td><td> " + 
                             results['data']['categories_wrong'] + " </td><td> " + results['data']['categories_start_time'] + " </td><td> " + results['data']['categories_end_time'] +
                             " </td></tr></table>";
                             categories = categories.replaceAll("null", "n/a");
                             
-                            let fast_or_faster = "<h5>Fast or Faster</h5><table> <tr> <th>Completed</th> <th>Points</th> </tr>"+
+                            let fast_or_faster = "<h5>Fast or Faster</h5><table> <tr> <th class='long'>Completed</th> <th class='long'>Points</th> </tr>"+
                             "<td> " + results['data']['fast_or_faster_completed'] + " </td><td> " + results['data']['fast_or_faster_points'] +
                             " </td></tr></table>";
                             fast_or_faster = fast_or_faster.replaceAll("null", "n/a");
                             
                             
-                            let game_pad =  "<h5>Game Pad</h5><table> <tr> <th>Completed</th> <th>Correct</th> <th>Wrong</th> <th>start_time</th> <th>end_time</th> </tr>"+
+                            let game_pad =  "<h5>Game Pad</h5><table> <tr> <th class='stretch'>Completed</th> <th class='stretch'>Correct</th> <th class='stretch'>Wrong</th> <th class='stretch'>start_time</th> <th class='stretch'>end_time</th> </tr>"+
                             "<td> " + results['data']['game_pad_completed'] + " </td><td> " + results['data']['game_pad_correct'] + " </td><td> " + 
                             results['data']['game_pad_wrong'] + " </td><td> " + results['data']['game_pad_start_time'] + " </td><td> " + results['data']['game_pad_end_time'] +
                             " </td></tr></table>";
                             game_pad = game_pad.replaceAll("null", "n/a");
                             
-                            let bot_says =  "<h5>bot Says</h5><table> <tr> <th>Completed</th> <th>Points</th> <th>start_time</th> <th>end_time</th> </tr>"+
+                            let bot_says =  "<h5>bot Says</h5><table> <tr> <th class='many'>Completed</th> <th class='many'>Points</th> <th class='long'>start_time</th> <th class='long'>end_time</th> </tr>"+
                             "<td> " + results['data']['bot_says_completed'] + " </td><td> " + results['data']['bot_says_points'] +
                             " </td><td> " + results['data']['bot_says_start_time'] + " </td><td> " + results['data']['bot_says_end_time'] +
                             " </td></tr></table>";
                             bot_says = bot_says.replaceAll("null", "n/a");
                             
-                            let where_my_error =  "<h5>Where's My Error</h5><table> <tr> <th>Completed</th> <th>Correct</th> <th>Wrong</th> <th>start_time</th> <th>end_time</th> </tr>"+
+                            let where_my_error =  "<h5>Where's My Error</h5><table> <tr> <th class='stretch'>Completed</th> <th class='stretch'>Correct</th> <th class='stretch'>Wrong</th> <th class='long'>start_time</th> <th class='long'>end_time</th> </tr>"+
                             "<td> " + results['data']['where_my_error_completed'] + " </td><td> " + results['data']['where_my_error_correct'] + " </td><td> " + 
                             results['data']['where_my_error_wrong'] + " </td><td> " + results['data']['where_my_error_start_time'] + " </td><td> " + results['data']['where_my_error_end_time'] +
                             " </td></tr></table>";

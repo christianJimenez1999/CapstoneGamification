@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
-    <link href="fast.css" rel="stylesheet">
-    <script src="jswork/fast.js"></script>
+
+    <head>
+        <title>fast_or_faster</title>
+        <link rel='stylesheet' type='text/css' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+        <link href="fast.css" rel="stylesheet">
+        <script src="jswork/fast.js"></script>
+    </head>
 
     <div id="fastWrap">
         <div id="fastQn">
             QUESTION HERE
-            <div id="toHide"><button  onClick='fast.init()'>ready?</button></div>
+            <p>In this game there is a timer of 5 seconds. You will have to pick the correct option from those given. You can reattempt this assessment 
+            as many times as you would like. You can also submit the score you want.</p>
+            <div id="toHide"><button class="btn btn-success" onClick='fast.init()'>ready?</button></div>
         </div>
 
         <div id="fastAns">

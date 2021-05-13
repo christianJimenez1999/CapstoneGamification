@@ -943,6 +943,23 @@ app.get('/fast_or_faster',check_authenticated, function(req, res) {
     res.render('fast_or_faster');
 });
 
+app.post('/inputFastOrFaster', function(req, res) {
+    console.log("yo, it made it", req.body);
+    
+    var stmt = 'INSERT INTO fast_or_faster (fast_or_faster_user, fast_or_faster_points, fast_or_faster_completed) VALUES (?,?,?)'+
+                'ON DUPLICATE KEY UPDATE fast_or_faster_points=VALUES(fast_or_faster_points);'
+    
+    var data = [req.session.candidateInfo.candidate_id, Number(req.body.points), true]
+    
+    connection.query(stmt, data, function(error, result) {
+        if (error) throw error;
+        else{
+            console.log("success!");
+            res.redirect('/candidate_loggedin');
+        }
+    })
+});
+
 
 // the port listen
 app.listen(process.env.PORT, process.env.IP, function(){

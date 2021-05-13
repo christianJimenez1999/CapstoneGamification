@@ -75,8 +75,10 @@ var fast = {
         fast.hans.id = "fastAns";
         fast.hwrap.appendChild(fast.hans);
 
-        let toHide = document.getElementById('toHide');
-        toHide.innerHTML = ""; // maybe hide the original tutorial div
+        let toHide1 = document.getElementById('fastQn');
+        let toHide2 = document.getElementById('fastAns');
+        toHide1.innerHTML = ""; // maybe hide the original tutorial div
+        toHide2.innerHTML = "";
         
         fast.draw();
     },
@@ -113,7 +115,18 @@ var fast = {
                     fast.draw();
                 }
             else {
-                fast.hqn.innerHTML = `You have answered ${fast.score} of ${fast.data.length} correctly.`; //was hQn
+                var partA = "<div class='container row rounded-lg border border-info' style='width:30%; margin:auto; background:#b4f3ff; padding:12px;'>"
+
+                var input =
+                        "<form class='col-md' action='/inputFastOrFaster' method='POST'>" +
+                            "<input hidden type='text' id='points' name='points' value='"+fast.score+"'>" + 
+                            "<input class='btn btn-success' type='submit' value='Submit score!'>" +
+                        "</form>"
+                        
+                var input2 = "<a class='col-md' href='/fast_or_faster'><button class='btn btn-info'>redo!</button></a>"
+                var partB = "</div>"
+                
+                fast.hqn.innerHTML = `You have answered ${fast.score} of ${fast.data.length} correctly.` + partA+input+input2+partB; //was hQn
                 fast.hans.innerHTML = ""; // was hAns
             }
         }, 5000); // about 5 seconds
